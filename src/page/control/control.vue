@@ -110,13 +110,13 @@
                 }
                 
                 this.$store.state.selectedControlsAttributes.push(this.controls[evt.item.id])
-
+                console.log(this.$store.state.selectedControlsAttributes)
                 control.tag.index = showCount + 1
                 this.controls.push(control)
              
                 this.$store.state.selectedIndex = showCount
                 evt.item.selectedIndex = showCount
-               
+               console.log(this.$store.state.selectedIndex)
             },
             onStart (evt) {
                 // console.log('onStart')

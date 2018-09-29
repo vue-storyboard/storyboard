@@ -1,44 +1,37 @@
 <template>
     <div class="attribute-container">
         <div class="title"><span>attribute</span></div>
-        <elButtonAttribute></elButtonAttribute>
+        <component :is="selectedControl"></component>
     </div>
 </template>
 
 <script>
-    import elementButton from '@/components/elementUI/el-button.vue'
-    import elButtonAttribute from '@/components/Hello-World.vue'
+    import blankAttribute from '@/components/elementUI/attribute/blank.vue'
+    import buttonAttribute from '@/components/elementUI/attribute/elButton.vue'
+    import radioAttribute from '@/components/elementUI/attribute/elRadio.vue'
 
     export default {
         data() {
             return {
-                types: elementButton.button.types,
-                styles: elementButton.button.styles,
-                sizes: elementButton.button.sizes,
-                icons: elementButton.button.icons,
-                value: ''
+
             }
         },
         components: {
-            elButtonAttribute,
+            buttonAttribute,
+            radioAttribute,
+            blankAttribute
         },
         computed: {
-            // selectedIndex: {
-            //     get () {
-            //         return this.$store.state.selectedIndex
-            //     }
-            // },
-            // selectedControlAttribute: {
-            //     get () {
-                    
-            //         if (this.$store.state.selectedControlsAttributes.length > 0) {
-            //             // console.log(this.$store.state.selectedControlsAttributes)
-            //             return this.$store.state.selectedControlsAttributes[this.$store.state.selectedIndex].attribute
-            //         }
-            //         return {}
-            //     }
-            // },
-        },
+            selectedControl () {
+                if (this.$store.state.selectedControlsAttributes.length > 0) {
+                    let name = this.$store.state.selectedControlsAttributes[this.$store.state.selectedIndex].name
+                    let names = name.split('-')
+                    // console.log(this.$store.state.selectedIndex, names[names.length - 1] + 'Attribute')
+                    return names[names.length - 1] + 'Attribute'
+                }
+                return blankAttribute
+            }
+        }
     }
 </script>
 

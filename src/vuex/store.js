@@ -25,6 +25,22 @@ const state = {
                 icon: ''
             },
         },
+        {
+            type: 'radio',
+            name: 'sb-el-radio',
+            show: true,
+            tag:{
+                id: 1,
+                index: 0
+            },
+            attribute: {
+                text: '',
+                type: '',
+                styles: [],
+                size: 'small',
+                icon: ''
+            },
+        },
         
     ],
 }
