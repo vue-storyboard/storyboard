@@ -3,20 +3,20 @@
         <div class="title"><span>control</span></div>
         <div class="control-container-box">
             <el-row v-for="(row, rowKey) in rowArray" :key="rowKey" >
-                <el-col v-for="(col, colKey) in controls" :key="colKey" :span='24 / myArrayCol' 
-                        v-show="rowKey * myArrayCol + colKey < controls.length && controls[rowKey * myArrayCol + colKey].show">
+                <el-col v-for="(col, colKey) in controls" :key="colKey" :span='24 / showCol' 
+                        v-show="rowKey * showCol + colKey < controls.length && controls[rowKey * showCol + colKey].show">
                   
-                    <div v-if="rowKey * myArrayCol + colKey < controls.length">
+                    <div v-if="rowKey * showCol + colKey < controls.length">
                         <draggable :options="{group:{ name:'control',  pull:'move', put:false }}" @start="drag=true" @end="drag=false" @remove="onRemove" @choose="onChoose">
                             <component 
-                                :id="rowKey * myArrayCol + colKey"
-                                :index="controls[rowKey * myArrayCol + colKey].tag.index" 
-                                :is="controls[rowKey * myArrayCol + colKey].name" 
-                                :text="controls[rowKey * myArrayCol + colKey].attribute.text" 
-                                :type="controls[rowKey * myArrayCol + colKey].attribute.type" 
-                                :styles="controls[rowKey * myArrayCol + colKey].attribute.styles" 
-                                :size="controls[rowKey * myArrayCol + colKey].attribute.size"
-                                :icon="controls[rowKey * myArrayCol + colKey].attribute.icon">
+                                :id="rowKey * showCol + colKey"
+                                :index="controls[rowKey * showCol + colKey].tag.index" 
+                                :is="controls[rowKey * showCol + colKey].name" 
+                                :text="controls[rowKey * showCol + colKey].attribute.text" 
+                                :type="controls[rowKey * showCol + colKey].attribute.type" 
+                                :styles="controls[rowKey * showCol + colKey].attribute.styles" 
+                                :size="controls[rowKey * showCol + colKey].attribute.size"
+                                :icon="controls[rowKey * showCol + colKey].attribute.icon">
                             </component>
                         </draggable>
                     </div>
@@ -36,18 +36,13 @@
     export default {
         data() {
             return {
-                test: 'fff',
                 controls: this.$store.state.controls,
                 rowArray: [true],
                 showArray: []
             }
         },
         computed: {
-            myArrayRow: function() {
-                let length = this.showArray.length / 3
-                return Math.ceil(length)
-            },
-            myArrayCol: function() {
+            showCol: function() {
                 return 3
             },
 
@@ -102,9 +97,6 @@
             console.log('updated')
         },
         methods: {
-            sbELClick (evt) {
-       
-            },
             onRemove (evt) {
                 console.log('remove')
                 this.test = showCount
