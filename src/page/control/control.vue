@@ -5,8 +5,9 @@
             <el-row v-for="(row, rowKey) in rowArray" :key="rowKey" >
                 <el-col v-for="(col, colKey) in controls" :key="colKey" :span='24 / showCol' 
                         v-show="rowKey * showCol + colKey < controls.length && controls[rowKey * showCol + colKey].show">
-                  
+
                     <div v-if="rowKey * showCol + colKey < controls.length">
+
                         <draggable :options="{group:{ name:'control',  pull:'move', put:false }}" @start="drag=true" @end="drag=false" @remove="onRemove" @choose="onChoose">
                             <component 
                                 :id="rowKey * showCol + colKey"
@@ -38,7 +39,8 @@
             return {
                 controls: this.$store.state.controls,
                 rowArray: [true],
-                showArray: []
+                showArray: [],
+                maxControl: {}
             }
         },
         computed: {
@@ -53,15 +55,71 @@
         },
         watch: {
             controls (newVal, oldVal) {
+                
+                // this.calcMaxControl()
+
+                newVal.map((element, index) => {
+                    element.show = false
+                    element.newIndex = 0
+                    if (element.tag.index >= this.maxControl[element.name].tag.index) {
+                        element.show = true
+                        this.showArray.push(element)
+                    }
+                    return element
+                })
+                
+            }
+        },
+        updated() {
+            console.log('updated')
+      
+        },
+        methods: {
+            onRemove (evt) {
+                console.log('remove')
+                this.test = showCount
+                let control = JSON.parse(JSON.stringify(this.controls[evt.item.id]))
+                let showCount = this.$store.state.selectedControlsAttributes.length
+                control.tag = {
+                    id: evt.item.id,
+                    index: showCount,
+                }
+                /**
+                 * 00  10
+                 * 00  10_  11
+                 * 00_ 02   10_  11
+                 */
+                this.calcMaxControl()
+                this.$store.state.selectedControlsAttributes.push(this.controls[evt.item.id])
+                // console.log(this.$store.state.selectedControlsAttributes)
+                control.tag.index = showCount + 1
+                this.controls.push(control)
+                
+                console.log(this.maxControl[control.name])
+                // this.controls.splice(this.maxControl[control.name].tag.index + 1, 0, control)
+                // Vue.set(this.controls, evt.item.id + 1, control)
+             
+                this.$store.state.selectedIndex = showCount
+                evt.item.selectedIndex = showCount
+                console.log(this.$store.state.selectedIndex)
+                console.log(this.controls)
+            },
+            onStart (evt) {
+                // console.log('onStart')
+            },
+            onChoose (evt) {
+                // console.log('onChoose')
+            },
+            calcMaxControl () {
                 let obj = {}
-                obj[newVal[0].name] = {
+                obj[this.controls[0].name] = {
                     tag: {
-                        id: newVal[0].tag.id,
-                        index: newVal[0].tag.index
+                        id: this.controls[0].tag.id,
+                        index: this.controls[0].tag.index
                     }
                 }
 
-                newVal.map(element => {
+                this.controls.map(element => {
                     if (obj.hasOwnProperty(element.name) && 
                         obj[element.name].hasOwnProperty('tag') && 
                         element.tag.index > obj[element.name].tag.index) {
@@ -80,49 +138,7 @@
                         }
                     }
                 });
-           
-                newVal.map((element, index) => {
-                    element.show = false
-                    element.newIndex = 0
-                    if (element.tag.index >= obj[element.name].tag.index) {
-                        element.show = true
-                        this.showArray.push(element)
-                    }
-                    return element
-                })
-                
-            }
-        },
-        updated() {
-            console.log('updated')
-        },
-        methods: {
-            onRemove (evt) {
-                console.log('remove')
-                this.test = showCount
-                let control = JSON.parse(JSON.stringify(this.controls[evt.item.id]))
-                let showCount = this.$store.state.selectedControlsAttributes.length
-                control.tag = {
-                    id: evt.item.id,
-                    index: showCount,
-                    show: true,
-                    newIndex: 2
-                }
-                
-                this.$store.state.selectedControlsAttributes.push(this.controls[evt.item.id])
-                console.log(this.$store.state.selectedControlsAttributes)
-                control.tag.index = showCount + 1
-                this.controls.push(control)
-             
-                this.$store.state.selectedIndex = showCount
-                evt.item.selectedIndex = showCount
-               console.log(this.$store.state.selectedIndex)
-            },
-            onStart (evt) {
-                // console.log('onStart')
-            },
-            onChoose (evt) {
-                // console.log('onChoose')
+                this.maxControl = obj
             }
         }
     }
