@@ -7,8 +7,8 @@
 <script>
     import Vue from 'vue'
 
-    let Radio = {
-        name: 'sb-el-radio',
+    let Switch = {
+        name: 'sb-el-switch',
         styles: [
             "bordered",
         ],
@@ -19,12 +19,17 @@
         ],
     }
 
-    Vue.component(Radio.name, {
+    Vue.component(Switch.name, {
         props: [
             'attribute',
             'initial',
             'index'
         ],
+        data() {
+            return {
+                value: true
+            }
+        },
         computed: {
             _style () {
                 if (this.attribute.styles) {
@@ -41,10 +46,12 @@
                 return ''
             }
         },
-        template: '<el-radio ' +
-                '@click.native.prevent="_click" label="" :class="_style" :size="attribute.size">' 
-                +'{{attribute.text}}' 
-                +'</el-radio>',
+        template: '<el-switch ' +
+                '@click.native.prevent="_click" v-model="value" ' +
+                ':active-color="attribute.activeColor"' +
+                ':inactive-color="attribute.inactivecolor">' +
+                '{{attribute.text}}' +
+                '</el-switch>',
         methods: {
             _click (evt) {
                 if (this.initial === true) {
@@ -58,7 +65,7 @@
     })
 
     export default {
-        Radio
+        Switch
     }
 </script>
 

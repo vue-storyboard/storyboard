@@ -10,9 +10,8 @@ const state = {
     ],
     controls: [
         {
-            type: 'button',
-            name: 'sb-el-button',
-            show: true,
+            type: 'radio',
+            name: 'sb-el-radio',
             tag:{
                 id: 0,
                 index: 0
@@ -26,9 +25,8 @@ const state = {
             },
         },
         {
-            type: 'radio',
-            name: 'sb-el-radio',
-            show: true,
+            type: 'button',
+            name: 'sb-el-button',
             tag:{
                 id: 1,
                 index: 0
@@ -41,7 +39,24 @@ const state = {
                 icon: ''
             },
         },
-        
+        {
+            type: 'switch',
+            name: 'sb-el-switch',
+            tag:{
+                id: 2,
+                index: 0
+            },
+            attribute: {
+                text: '',
+                activeColor: '',
+                inactivecolor: '',
+                styles: [],
+                size: 'small',
+                icon: ''
+            },
+        },
+          
+      
     ],
 }
 

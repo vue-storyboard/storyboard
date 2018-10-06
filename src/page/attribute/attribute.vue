@@ -9,6 +9,7 @@
     import blankAttribute from '@/components/elementUI/attribute/blank.vue'
     import buttonAttribute from '@/components/elementUI/attribute/elButton.vue'
     import radioAttribute from '@/components/elementUI/attribute/elRadio.vue'
+    import switchAttribute from '@/components/elementUI/attribute/elSwitch.vue'
 
     export default {
         data() {
@@ -19,7 +20,8 @@
         components: {
             buttonAttribute,
             radioAttribute,
-            blankAttribute
+            blankAttribute,
+            switchAttribute
         },
         computed: {
             selectedControl () {

@@ -7,7 +7,7 @@
 <script>
     import Vue from 'vue'
 
-    let button = {
+    let Button = {
         name: 'sb-el-button',
         types: [
             "primary",
@@ -101,13 +101,10 @@
         ],
     }
 
-    Vue.component(button.name, {
+    Vue.component(Button.name, {
         props: [
-            'text',
-            'type',
-            'styles',
-            'size',
-            'icon',
+            'attribute',
+            'initial',
             'index'
         ],
         data() {
@@ -117,12 +114,12 @@
         },
         computed: {
             _style () {
-                if (this.styles) {
-                    if (typeof this.styles === 'string') {
-                        return 'is-' + this.style
+                if (this.attribute.styles) {
+                    if (typeof this.attribute.styles === 'string') {
+                        return 'is-' + this.attribute.styles
                     } else {
                         let styles = []
-                        this.styles.forEach(ele => {
+                        this.attribute.styles.forEach(ele => {
                             styles.push('is-' + ele)
                         });
                         return styles.join(' ')
@@ -131,18 +128,24 @@
                 return ''
             }
         },
-        template: '<el-button @click="_click" :type="type" :class="_style" :size="size" :icon="icon">{{text}}</el-button>',
+        template: '<el-button ' +
+                    '@click="_click" :type="attribute.type"' +
+                    ':class="_style" :size="attribute.size" :icon="attribute.icon">' +
+                    '{{attribute.text}}'+
+                    '</el-button>',
         methods: {
             _click (evt) {
-                this.$store.state.selectedIndex = evt.currentTarget.selectedIndex
-                console.log('selectedIndex', evt.currentTarget.selectedIndex)
-                this.$emit('click', evt)
+                if (this.initial === true) {
+                    return
+                }
+               this.$store.state.selectedIndex = this.index
+               this.$emit('click', evt)
             }
         }
     })
 
     export default {
-        button
+        Button
     }
 </script>
 

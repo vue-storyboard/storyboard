@@ -80,14 +80,14 @@
 </template>
 
 <script>
-    import elementButton from '@/components/elementUI/el-button.vue'
+    import elButton from '@/components/elementUI/el-button.vue'
     export default {
         data() {
             return {
-                types: elementButton.button.types,
-                styles: elementButton.button.styles,
-                sizes: elementButton.button.sizes,
-                icons: elementButton.button.icons,
+                types: elButton.Button.types,
+                styles: elButton.Button.styles,
+                sizes: elButton.Button.sizes,
+                icons: elButton.Button.icons,
                 value: ''
             }
         },

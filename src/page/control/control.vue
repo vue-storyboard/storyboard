@@ -3,21 +3,15 @@
         <div class="title"><span>control</span></div>
         <div class="control-container-box">
             <el-row v-for="(row, rowKey) in rowArray" :key="rowKey" >
-                <el-col v-for="(col, colKey) in controls" :key="colKey" :span='24 / showCol' 
-                        v-show="rowKey * showCol + colKey < controls.length && controls[rowKey * showCol + colKey].show">
-
+                <el-col v-for="(col, colKey) in controls" :key="colKey" :span='24 / showCol'>
                     <div v-if="rowKey * showCol + colKey < controls.length">
-
-                        <draggable :options="{group:{ name:'control',  pull:'move', put:false }}" @start="drag=true" @end="drag=false" @remove="onRemove" @choose="onChoose">
-                            <component 
+                        <draggable :options="{group:{ name:'control',  pull:'', put:false }}" 
+                        @start="drag=true" @end="onEnd" @choose="onChoose">
+                            <component
+                                :initial="true"
                                 :id="rowKey * showCol + colKey"
-                                :index="controls[rowKey * showCol + colKey].tag.index" 
-                                :is="controls[rowKey * showCol + colKey].name" 
-                                :text="controls[rowKey * showCol + colKey].attribute.text" 
-                                :type="controls[rowKey * showCol + colKey].attribute.type" 
-                                :styles="controls[rowKey * showCol + colKey].attribute.styles" 
-                                :size="controls[rowKey * showCol + colKey].attribute.size"
-                                :icon="controls[rowKey * showCol + colKey].attribute.icon">
+                                :attribute="controls[rowKey * showCol + colKey].attribute" 
+                                :is="controls[rowKey * showCol + colKey].name">
                             </component>
                         </draggable>
                     </div>
@@ -31,9 +25,10 @@
     import Vue from 'vue';
     import draggable from 'vuedraggable'
     import store from '@/vuex/store'
-    import elementButton from '@/components/elementUI/el-button.vue'
-    import elementRadio from '@/components/elementUI/el-radio.vue'
-  
+    import elButton from '@/components/elementUI/el-button.vue'
+    import elRadio from '@/components/elementUI/el-radio.vue'
+    import elSwitch from '@/components/elementUI/el-switch.vue'
+
     export default {
         data() {
             return {
@@ -54,92 +49,31 @@
 
         },
         watch: {
-            controls (newVal, oldVal) {
-                
-                // this.calcMaxControl()
-
-                newVal.map((element, index) => {
-                    element.show = false
-                    element.newIndex = 0
-                    if (element.tag.index >= this.maxControl[element.name].tag.index) {
-                        element.show = true
-                        this.showArray.push(element)
-                    }
-                    return element
-                })
-                
-            }
+          
         },
         updated() {
             console.log('updated')
       
         },
         methods: {
-            onRemove (evt) {
-                console.log('remove')
-                this.test = showCount
+            onEnd (evt) {
+       
                 let control = JSON.parse(JSON.stringify(this.controls[evt.item.id]))
                 let showCount = this.$store.state.selectedControlsAttributes.length
                 control.tag = {
-                    id: evt.item.id,
+                    id: control.tag.id,
                     index: showCount,
                 }
-                /**
-                 * 00  10
-                 * 00  10_  11
-                 * 00_ 02   10_  11
-                 */
-                this.calcMaxControl()
-                this.$store.state.selectedControlsAttributes.push(this.controls[evt.item.id])
-                // console.log(this.$store.state.selectedControlsAttributes)
-                control.tag.index = showCount + 1
-                this.controls.push(control)
-                
-                console.log(this.maxControl[control.name])
-                // this.controls.splice(this.maxControl[control.name].tag.index + 1, 0, control)
-                // Vue.set(this.controls, evt.item.id + 1, control)
-             
-                this.$store.state.selectedIndex = showCount
-                evt.item.selectedIndex = showCount
-                console.log(this.$store.state.selectedIndex)
-                console.log(this.controls)
+               this.$store.state.selectedControlsAttributes.push(control)
+               this.$store.state.selectedIndex = showCount
+      
             },
             onStart (evt) {
                 // console.log('onStart')
             },
             onChoose (evt) {
-                // console.log('onChoose')
+               //  console.log('onChoose')
             },
-            calcMaxControl () {
-                let obj = {}
-                obj[this.controls[0].name] = {
-                    tag: {
-                        id: this.controls[0].tag.id,
-                        index: this.controls[0].tag.index
-                    }
-                }
-
-                this.controls.map(element => {
-                    if (obj.hasOwnProperty(element.name) && 
-                        obj[element.name].hasOwnProperty('tag') && 
-                        element.tag.index > obj[element.name].tag.index) {
-                           obj[element.name] = {
-                                tag: {
-                                    id: element.tag.id,
-                                    index: element.tag.index
-                                }
-                            }
-                    } else {
-                        obj[element.name] = {
-                            tag: {
-                                id: element.tag.id,
-                                index: element.tag.index
-                            }
-                        }
-                    }
-                });
-                this.maxControl = obj
-            }
         }
     }
 </script>
@@ -156,7 +90,7 @@
         height: 5%;
     }
     .control-container-box {
-        background-color:red;
+        background-color:#bbbbbb;
         height: 95%;
         text-align: center;
     }

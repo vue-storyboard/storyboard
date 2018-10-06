@@ -1,7 +1,12 @@
 <template>
     <div  class="home-container">
-        <draggable class="viewport" :options="{group:{ name:'control', pull:'', put:true }}" @start="drag=true" @end="drag=false" @add="onAdd" >
-      
+        <draggable class="viewport" :options="{group:{ name:'control', pull:'', put:true }}" 
+        @start="drag=true" @end="drag=false">
+            <component v-for="(control, key) in controls" :key="key"   
+                :index="control.tag.index" 
+                :is="control.name" 
+                :attribute="control.attribute">
+            </component>
         </draggable>
         <div class="device-toolbar">
             <div class="device-container">
@@ -30,6 +35,7 @@
             return {
                 myArray: [
                 ],
+        
                 currentTarget: null,
                 deviceOptions: [],
                 selectedOptions: [],
@@ -64,11 +70,11 @@
             }
         },
         computed: {
-            // attributes: {
-            //     get () {
-            //         return this.$store.state.attributes
-            //     }
-            // }
+            controls: {
+                get () {
+                    return this.$store.state.selectedControlsAttributes
+                }
+            }
         },
         methods: {
              deviceChange(value) {
@@ -79,12 +85,8 @@
             },
             sbELClick (evt) {
                 this.currentTarget = evt.currentTarget
-                this.$store.state.selectedIndex = evt.currentTarget.selectedIndex - 1
-                console.log('obj.index  ' + this.$store.state.selectedIndex)
+        
             },
-            onAdd (evt) {
-                console.log('onAdd')
-            }
         },
      
     }
