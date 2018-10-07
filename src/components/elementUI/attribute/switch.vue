@@ -42,6 +42,27 @@
                 </template>
             </el-col>
         </el-row>
+           <el-row>
+            <el-col :span='tipCol'>
+                <span>ActiveText</span>
+            </el-col>
+            <el-col :span='contentCol'>
+                <template>
+                    <el-input v-model="selectedControlAttribute.activeText"  size="mini" placeholder="请输入文字"></el-input>
+                </template>
+            </el-col>
+        </el-row>
+           <el-row>
+            <el-col :span='tipCol'>
+                <span>InactiveText</span>
+            </el-col>
+            <el-col :span='contentCol'>
+                <template>
+                    <el-input v-model="selectedControlAttribute.inactiveText"  size="mini" placeholder="请输入文字"></el-input>
+               
+                </template>
+            </el-col>
+        </el-row>
         <el-row>
             <el-col :span='tipCol'>
                 <span>ActiveColor</span>

@@ -28,14 +28,13 @@
     import elButton from '@/components/elementUI/el-button.vue'
     import elRadio from '@/components/elementUI/el-radio.vue'
     import elSwitch from '@/components/elementUI/el-switch.vue'
+    import controls from '@/components/elementUI/control/control.js'
 
     export default {
         data() {
             return {
-                controls: this.$store.state.controls,
+                controls: controls,
                 rowArray: [true],
-                showArray: [],
-                maxControl: {}
             }
         },
         computed: {
@@ -60,10 +59,7 @@
        
                 let control = JSON.parse(JSON.stringify(this.controls[evt.item.id]))
                 let showCount = this.$store.state.selectedControlsAttributes.length
-                control.tag = {
-                    id: control.tag.id,
-                    index: showCount,
-                }
+                control.index = showCount
                this.$store.state.selectedControlsAttributes.push(control)
                this.$store.state.selectedIndex = showCount
       

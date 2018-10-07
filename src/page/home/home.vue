@@ -3,7 +3,7 @@
         <draggable class="viewport" :options="{group:{ name:'control', pull:'', put:true }}" 
         @start="drag=true" @end="drag=false">
             <component v-for="(control, key) in controls" :key="key"   
-                :index="control.tag.index" 
+                :index="control.index" 
                 :is="control.name" 
                 :attribute="control.attribute">
             </component>

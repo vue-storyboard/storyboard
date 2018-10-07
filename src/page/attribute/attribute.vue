@@ -7,9 +7,9 @@
 
 <script>
     import blankAttribute from '@/components/elementUI/attribute/blank.vue'
-    import buttonAttribute from '@/components/elementUI/attribute/elButton.vue'
-    import radioAttribute from '@/components/elementUI/attribute/elRadio.vue'
-    import switchAttribute from '@/components/elementUI/attribute/elSwitch.vue'
+    import buttonAttribute from '@/components/elementUI/attribute/button.vue'
+    import radioAttribute from '@/components/elementUI/attribute/radio.vue'
+    import switchAttribute from '@/components/elementUI/attribute/switch.vue'
 
     export default {
         data() {
