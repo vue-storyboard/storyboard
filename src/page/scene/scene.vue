@@ -94,9 +94,6 @@
           this.$store.state.currentIndex = data.id
         }
       },
-       getCurrentNode() {
-        
-      },
       
     }
   };
