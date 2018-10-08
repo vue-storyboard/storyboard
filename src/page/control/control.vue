@@ -56,13 +56,11 @@
         },
         methods: {
             onEnd (evt) {
-       
                 let control = JSON.parse(JSON.stringify(this.controls[evt.item.id]))
                 let showCount = this.$store.state.controls.length
                 control.index = showCount
-               this.$store.state.controls.push(control)
-               this.$store.state.currentIndex = showCount
-      
+                this.$store.state.controls.push(control)
+                this.$store.state.currentIndex = showCount
             },
             onStart (evt) {
                 // console.log('onStart')
