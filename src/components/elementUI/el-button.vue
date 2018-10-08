@@ -40,7 +40,7 @@
         data() {
             return {
                 templateAttr: '',
-                templateContent: ''
+                templateContent: 'dddddddddd'
             }
         },
         computed: {
@@ -64,9 +64,32 @@
                 return ''
             }
         },
+        render: function(createElement) {
+                var self = this;
+                return createElement('el-button', {//一个包含模板相关属性的数据对象
+                    'class': {
+                        foo: true,
+                        bar: false
+                    },
+                    style: {
+                        color: 'red',
+                        fontSize: '14px'
+                    },
+                    attrs: {
+                        type: 'success'
+                    },
+                    on: {
+                        click: this._click
+                    },
+                    domProps: {
+                        innerHTML: this.attribute.text.value
+                    }
+                });
+            },
         template: '<el-button >{{this.templateContent}}</el-button>',
         methods: {
             _click (evt) {
+                console.log('tag', '')
                 if (this.initial === true) {
                     return
                 }

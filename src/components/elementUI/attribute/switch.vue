@@ -5,7 +5,7 @@
                 <span>Text</span>
             </el-col>
             <el-col :span='contentCol'>
-                <el-input v-model="selectedControlAttribute.text" size="mini" placeholder="请输入内容"></el-input>
+                <el-input v-model="selectedControlAttribute.text.value" size="mini" placeholder="请输入内容"></el-input>
             </el-col>
         </el-row>
         <el-row>
@@ -48,7 +48,7 @@
             </el-col>
             <el-col :span='contentCol'>
                 <template>
-                    <el-input v-model="selectedControlAttribute.activeText"  size="mini" placeholder="请输入文字"></el-input>
+                    <el-input v-model="selectedControlAttribute.activeText.value"  size="mini" placeholder="请输入文字"></el-input>
                 </template>
             </el-col>
         </el-row>
@@ -58,7 +58,7 @@
             </el-col>
             <el-col :span='contentCol'>
                 <template>
-                    <el-input v-model="selectedControlAttribute.inactiveText"  size="mini" placeholder="请输入文字"></el-input>
+                    <el-input v-model="selectedControlAttribute.inactiveText.value"  size="mini" placeholder="请输入文字"></el-input>
                
                 </template>
             </el-col>

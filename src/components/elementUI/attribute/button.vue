@@ -5,7 +5,7 @@
                 <span>Text</span>
             </el-col>
             <el-col :span='18'>
-                <el-input v-model="selectedControlAttribute.text" size="mini" placeholder="请输入内容"></el-input>
+                <el-input v-model="selectedControlAttribute.text.value" size="mini" placeholder="请输入内容"></el-input>
             </el-col>
         </el-row>
         <el-row>
@@ -14,7 +14,7 @@
             </el-col>
             <el-col :span='18'>
                 <template>
-                    <el-select size="mini" v-model="selectedControlAttribute.type" placeholder="请选择">
+                    <el-select size="mini" v-model="selectedControlAttribute.type.value" placeholder="请选择">
                         <el-option
                         v-for="item in types"
                         :key="item"
@@ -65,7 +65,7 @@
             </el-col>
             <el-col :span='18'>
                 <template>
-                    <el-select size="mini" v-model="selectedControlAttribute.icon" placeholder="请选择">
+                    <el-select size="mini" v-model="selectedControlAttribute.icon.value" placeholder="请选择">
                         <el-option
                         v-for="item in icons"
                         :key="item"
