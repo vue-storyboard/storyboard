@@ -4,7 +4,9 @@ import Vuex from 'vuex';
 Vue.use(Vuex)
 
 const state = {
-    selectedIndex: 0,
+    // 当前索引
+    currentIndex: 0,
+    // 视图所有控件
     controls: [
        
     ],

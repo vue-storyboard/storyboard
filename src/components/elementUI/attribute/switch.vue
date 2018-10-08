@@ -109,16 +109,16 @@
             contentCol () {
                 return 24 - this.tipCol
             },
-            selectedIndex: {
+            currentIndex: {
                 get () {
-                    return this.$store.state.selectedIndex
+                    return this.$store.state.currentIndex
                 }
             },
             selectedControlAttribute: {
                 get () {
                     
                     if (this.$store.state.controls.length > 0) {
-                        return this.$store.state.controls[this.$store.state.selectedIndex].attribute
+                        return this.$store.state.controls[this.$store.state.currentIndex].attribute
                     }
                     return {}
                 }

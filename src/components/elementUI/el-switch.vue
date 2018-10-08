@@ -59,7 +59,7 @@
                 if (this.initial === true) {
                     return
                 }
-               this.$store.state.selectedIndex = this.index
+               this.$store.state.currentIndex = this.index
                this.$emit('click', evt)
             }
         }

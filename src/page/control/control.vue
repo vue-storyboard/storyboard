@@ -61,7 +61,7 @@
                 let showCount = this.$store.state.controls.length
                 control.index = showCount
                this.$store.state.controls.push(control)
-               this.$store.state.selectedIndex = showCount
+               this.$store.state.currentIndex = showCount
       
             },
             onStart (evt) {

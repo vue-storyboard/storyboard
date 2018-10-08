@@ -26,9 +26,9 @@
         computed: {
             selectedControl () {
                 if (this.$store.state.controls.length > 0) {
-                    let name = this.$store.state.controls[this.$store.state.selectedIndex].name
+                    let name = this.$store.state.controls[this.$store.state.currentIndex].name
                     let names = name.split('-')
-                    // console.log(this.$store.state.selectedIndex, names[names.length - 1] + 'Attribute')
+                    // console.log(this.$store.state.currentIndex, names[names.length - 1] + 'Attribute')
                     return names[names.length - 1] + 'Attribute'
                 }
                 return blankAttribute
