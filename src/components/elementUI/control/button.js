@@ -3,11 +3,20 @@ let control = {
     type: 'button',
     name: 'sb-el-button',
     attribute: {
-        text: '',
-        type: '',
+        text: {
+            type: 'text',
+            value: ''
+        },
+        type: {
+            type: 'text',
+            value: ''
+        },
         styles: [],
         size: 'small',
-        icon: ''
+        icon: {
+            type: 'text',
+            value: ''
+        },
     },
     
 }

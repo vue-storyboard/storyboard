@@ -70,9 +70,9 @@
             <el-col :span='contentCol'>
                 <template>
                     <el-col :span='18'>
-                        <el-input v-model="selectedControlAttribute.activeColor"  size="mini" placeholder="请输入颜色"></el-input>
+                        <el-input v-model="selectedControlAttribute.activeColor.value"  size="mini" placeholder="请输入颜色"></el-input>
                     </el-col>
-                    <el-color-picker v-model="selectedControlAttribute.activeColor" size="mini"></el-color-picker>
+                    <el-color-picker v-model="selectedControlAttribute.activeColor.value" size="mini"></el-color-picker>
                 </template>
             </el-col>
         </el-row>
@@ -83,9 +83,9 @@
             <el-col :span='contentCol'>
                 <template>
                     <el-col :span='18'>
-                        <el-input v-model="selectedControlAttribute.inactivecolor"  size="mini" placeholder="请输入颜色"></el-input>
+                        <el-input v-model="selectedControlAttribute.inactivecolor.value"  size="mini" placeholder="请输入颜色"></el-input>
                     </el-col>
-                    <el-color-picker v-model="selectedControlAttribute.inactivecolor" size="mini"></el-color-picker>
+                    <el-color-picker v-model="selectedControlAttribute.inactivecolor.value" size="mini"></el-color-picker>
                 </template>
             </el-col>
         </el-row>

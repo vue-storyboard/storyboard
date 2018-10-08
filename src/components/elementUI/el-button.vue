@@ -39,7 +39,8 @@
         ],
         data() {
             return {
-               
+                templateAttr: '',
+                templateContent: ''
             }
         },
         computed: {
@@ -48,6 +49,11 @@
                     if (typeof this.attribute.styles === 'string') {
                         return 'is-' + this.attribute.styles
                     } else {
+                        this.template = '<el-button ' +
+                    '@click="_click" :type="attribute.type.value"' +
+                    ':class="_style" :size="attribute.size" :icon="attribute.icon.value">' +
+                    '{{attribute.text.value}}'+
+                    '</el-button>'
                         let styles = []
                         this.attribute.styles.forEach(ele => {
                             styles.push('is-' + ele)
@@ -58,11 +64,7 @@
                 return ''
             }
         },
-        template: '<el-button ' +
-                    '@click="_click" :type="attribute.type"' +
-                    ':class="_style" :size="attribute.size" :icon="attribute.icon">' +
-                    '{{attribute.text}}'+
-                    '</el-button>',
+        template: '<el-button >{{this.templateContent}}</el-button>',
         methods: {
             _click (evt) {
                 if (this.initial === true) {

@@ -6,6 +6,7 @@ Vue.use(Vuex)
 const state = {
     // 当前索引
     currentIndex: 0,
+    templateAttr: 'type="success"',
     // 视图所有控件
     controls: [
        

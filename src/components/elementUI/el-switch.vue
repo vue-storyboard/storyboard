@@ -48,11 +48,11 @@
         },
         template: '<el-switch ' +
                 '@click.native.prevent="_click" v-model="value" ' +
-                ':active-text="attribute.activeText"' +
-                ':inactive-text="attribute.inactiveText"' +
-                ':active-color="attribute.activeColor"' +
-                ':inactive-color="attribute.inactivecolor">' +
-                '{{attribute.text}}' +
+                ':active-text="attribute.activeText.value"' +
+                ':inactive-text="attribute.inactiveText.value"' +
+                ':active-color="attribute.activeColor.value"' +
+                ':inactive-color="attribute.inactivecolor.value">' +
+                '{{attribute.text.value}}' +
                 '</el-switch>',
         methods: {
             _click (evt) {
