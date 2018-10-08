@@ -5,7 +5,7 @@ Vue.use(Vuex)
 
 const state = {
     selectedIndex: 0,
-    selectedControlsAttributes: [
+    controls: [
        
     ],
     

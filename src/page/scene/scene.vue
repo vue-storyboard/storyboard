@@ -1,57 +1,57 @@
 <template>
-    <div class="scene-container">
-        <div class="title"><span>scene</span></div>
-        <el-tree :data="data" :props="defaultProps" @node-click="handleNodeClick"></el-tree>
-    </div>
+  <div class="scene-container">
+    <div class="title"><span>scene</span></div>
+      <el-tree :data="treeData" node-key="treeId" default-expand-all :expand-on-click-node="true">
+        <span class="custom-tree-node" slot-scope="{ node, data }" >
+          <span>{{ node.label }}</span>
+          <span v-if="data.pid==0">
+            <el-button type="text" size="mini" @click.stop="() => showCode(data)">
+              <span>&lt;&gt;</span>
+            </el-button>
+          </span>
+        
+        </span>
+      </el-tree>
+  </div>
 </template>
 
 <script>
   export default {
-    data() {
+     data() {
+      const data = [{
+      	pid: 0,
+        id: 1,
+        label: '文件 1',
+        children: [{
+          id: 4,
+          label: '组件 1-1',
+          children: [{
+            id: 9,
+            label: '组件 1-1-1'
+          }, {
+            id: 10,
+            label: '组件 1-1-2'
+          }]
+        }]
+      }, {
+        pid: 0,
+        id: 2,
+        label: '文件 2',
+        children: [{
+          id: 5,
+          label: '组件 2-1'
+        }, {
+          id: 6,
+          label: '组件 2-2'
+        }]
+      }];
       return {
-        data: [{
-          label: '一级 1',
-          children: [{
-            label: '二级 1-1',
-            children: [{
-              label: '三级 1-1-1'
-            }]
-          }]
-        }, {
-          label: '一级 2',
-          children: [{
-            label: '二级 2-1',
-            children: [{
-              label: '三级 2-1-1'
-            }]
-          }, {
-            label: '二级 2-2',
-            children: [{
-              label: '三级 2-2-1'
-            }]
-          }]
-        }, {
-          label: '一级 3',
-          children: [{
-            label: '二级 3-1',
-            children: [{
-              label: '三级 3-1-1'
-            }]
-          }, {
-            label: '二级 3-2',
-            children: [{
-              label: '三级 3-2-1'
-            }]
-          }]
-        }],
-        defaultProps: {
-          children: 'children',
-          label: 'label'
-        }
-      };
+        treeId: 1000,
+        treeData: JSON.parse(JSON.stringify(data))
+      }
     },
     methods: {
-      handleNodeClick(data) {
+      showCode(data) {
         console.log(data);
       }
     }

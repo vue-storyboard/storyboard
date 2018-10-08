@@ -72,7 +72,7 @@
         computed: {
             controls: {
                 get () {
-                    return this.$store.state.selectedControlsAttributes
+                    return this.$store.state.controls
                 }
             }
         },

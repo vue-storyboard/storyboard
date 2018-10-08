@@ -58,9 +58,9 @@
             onEnd (evt) {
        
                 let control = JSON.parse(JSON.stringify(this.controls[evt.item.id]))
-                let showCount = this.$store.state.selectedControlsAttributes.length
+                let showCount = this.$store.state.controls.length
                 control.index = showCount
-               this.$store.state.selectedControlsAttributes.push(control)
+               this.$store.state.controls.push(control)
                this.$store.state.selectedIndex = showCount
       
             },

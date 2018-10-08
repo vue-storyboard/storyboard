@@ -64,9 +64,8 @@
             selectedControlAttribute: {
                 get () {
                     
-                    if (this.$store.state.selectedControlsAttributes.length > 0) {
-                        // console.log(this.$store.state.selectedControlsAttributes)
-                        return this.$store.state.selectedControlsAttributes[this.$store.state.selectedIndex].attribute
+                    if (this.$store.state.controls.length > 0) {
+                        return this.$store.state.controls[this.$store.state.selectedIndex].attribute
                     }
                     return {}
                 }
