@@ -7,7 +7,7 @@
 <script>
     import Vue from 'vue'
 
-    Vue.component('sb-el-switch', {
+    Vue.component('sb-el-slider', {
         props: [
             'attribute',
             'initial',
@@ -15,7 +15,7 @@
         ],
         data() {
             return {
-                value: false
+                value: 10
             }
         },
         computed: {
@@ -26,7 +26,6 @@
             let attrs = ''
             
             for (let key in this.attribute) {
-
                 let codeKey = key
                 if (this.attribute[key].hasOwnProperty('alias')) {
                     codeKey = this.attribute[key].alias
@@ -34,9 +33,13 @@
 
                 if (this.attribute[key].type == 'boolean') {
                     if (this.attribute[key].value) {
-                        attrs += (codeKey + ' ')
+                       attrs += (':' + codeKey + '="' + this.attribute[key].value + '" ')
                     }
-                } else {
+                }
+                else if (this.attribute[key].type == 'number') {
+                    attrs += (':' + codeKey + '="' + this.attribute[key].value + '" ')
+                } 
+                else {
                     attrs += (codeKey + '="' + this.attribute[key].value + '" ')
                 }
             }
@@ -48,7 +51,7 @@
                             value: self.value
                         }
                     },
-                    template: `<el-switch v-model="value" ${attrs}  @click.native.prevent="click"></el-switch>` ,
+                    template: `<el-slider v-model="value" ${attrs}  @click.native.prevent="click"></el-slider>` ,
                     methods: {
                         click (evt) {
                             self._click(evt)

@@ -2,8 +2,8 @@
     <div class="control-container">
         <div class="title"><span>control</span></div>
         <div class="control-container-box">
-            <el-row v-for="(row, rowKey) in rowArray" :key="rowKey" >
-                <el-col v-for="(col, colKey) in controls" :key="colKey" :span='24 / showCol'>
+            <el-row v-for="(row, rowKey) in showRow" :key="rowKey" >
+                <el-col v-for="(col, colKey) in showCol" :key="colKey" :span='24 / showCol'>
                     <div v-if="rowKey * showCol + colKey < controls.length">
                         <draggable :options="{group:{ name:'control',  pull:'', put:false }}" 
                         @start="drag=true" @end="onEnd" @choose="onChoose">
@@ -26,21 +26,25 @@
     import draggable from 'vuedraggable'
     import store from '@/vuex/store'
     import components from '@/components/template/elementUI/index'
-    import controls from '@/components/template/elementUI/control/control.js'
+    import uiControls from '@/components/template/elementUI/control/control.js'
 
     export default {
         data() {
             return {
-                rowArray: [true],
+            
             }
         },
         computed: {
             controls () {
                 var arr = []
-                for (let i in controls) {
-                    arr.push(controls[i]); 
+                for (let key in uiControls) {
+                    arr.push(uiControls[key]); 
                 }
                 return arr
+            },
+            showRow: function() {
+                let length = this.controls.length / 3
+                return Math.ceil(length)
             },
             showCol: function() {
                 return 3

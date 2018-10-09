@@ -77,27 +77,32 @@
                 let attrs = ''
             
                 for (let key in control.attribute) {
+                    let codeKey = key
+                    if (control.attribute[key].hasOwnProperty('alias')) {
+                        codeKey = control.attribute[key].alias
+                    } 
+
                     if (control.attribute[key].type == 'boolean') {
                         if (control.attribute[key].value) {
-                            attrs += (key + ' ')
+                            attrs += (':' + codeKey + '="' + control.attribute[key].value + '" ')
                         }
-                    } else {
-                        if (control.attribute[key].hasOwnProperty('alias')) {
-                            if (control.attribute[key].value.length > 0) {
-                                attrs += (control.attribute[key].alias + '="' + control.attribute[key].value + '" ')
-                            }
-                            
-                        } else {
-                            if (control.attribute[key].value.length > 0) {
-                                attrs += (key + '="' + control.attribute[key].value + '" ')
-                            }
+                    } 
+                    else if (control.attribute[key].type == 'number') {
+                        attrs += (':' + codeKey + '="' + control.attribute[key].value + '" ')
+                    } 
+                    else {
+                        if (control.attribute[key].value.length > 0) {
+                            attrs += (codeKey + '="' + control.attribute[key].value + '" ')
                         }
                     }
                 }
               
-                this.code += `<${control.name} ${attrs}>${control.attribute['text'].value}</${control.name}>\n`
+                this.code += `<${control.name} ${attrs}>${control.attribute.hasOwnProperty('text') ? control.attribute['text'].value : ''}</${control.name}>\n`
          
             });
+        },
+        methods: {
+          
         },
     }
 </script>
