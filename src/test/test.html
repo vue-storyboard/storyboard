@@ -5,51 +5,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <style>
-    div {
-        background-color: aqua;
-        width: 60px;
-        height: 60px;
-    }
+#drag{
+    width: 300px;
+    height: 600px;
+    position: absolute;
+    top: 200px;
+    left: 130px;
+    border:2px solid #777;
+    border-radius: 2px;
+    background: #f3f3f3;
+}
 </style>
-<body>
-        <!-- onmousedown 	script 	当元素上按下鼠标按钮时触发。
-        onmousemove 	script 	当鼠标指针移动到元素上时触发。
-        onmouseout 	script 	当鼠标指针移出元素时触发。
-        onmouseover 	script 	当鼠标指针移动到元素上时触发。
-        onmouseup 	script 	当在元素上释放鼠标按钮时触发。 -->
-    <div 
-    onmousedown="onMouseDown()" 
-    onmousemove="onMouseMove()" 
-    onmouseout="onMouseOut()" 
-    onmouseover="onMouseOver()" 
-    onmouseup="onMouseUp()">div</div>
-</body>
-</html>
+<div id="app">
+    <div id="drag" >
+      <div class="toolBarTitle move" v-drag>移动工具栏</div>
+    </div>
+</div>
+
 <script>
-    var inContainer = false
-    var touchingContainer = false
-    function onMouseDown() {
-       console.log('onMouseDown 	当元素上按下鼠标按钮时触发');
-        
-    }
-    function onMouseMove() {
-       console.log('onMouseMove 	当鼠标指针移动到元素上时触发。');
-        
-    }
-    function onMouseOut() {
-        inContainer = false
-       console.log('onMouseOut 	当鼠标指针移出元素时触发。');
-        
-    }
-    function onMouseOver() {
-        inContainer = true
-       console.log('onMouseOver 	当鼠标指针移动到元素上时触发。');
-        
-    }
-    function onMouseUp() {
-       console.log('onMouseUp 	当在元素上释放鼠标按钮时触发。');
-        
-    }
+
+    Vue.directive('drag', {
+        inserted: function(el){
+            el.onmousedown = function(e){
+                console.log('down', '')
+                // 获取鼠标点击处分别与div左边和上边的距离：鼠标位置-div位置
+                var divx = e.clientX - document.getElementById('drag').offsetLeft;
+                var divy = e.clientY - document.getElementById('drag').offsetTop;
+                //包含在onmousedown里，表示点击后才移动，为防止鼠标移出div，使用document.onmousemove
+                document.onmousemove = function(e){
+                    console.log('move');
+                    
+                    //获取移动后div的位置：鼠标位置-divx/divy
+                    var l = e.clientX - divx;
+                    var t = e.clientY - divy;
+                    document.getElementById('drag').style.left=l+'px';
+                    document.getElementById('drag').style.top=t+'px';
+                }
+                document.onmouseout = function(e){
+                    console.log('onmouseout');
+                    
+                    document.onmousemove = null;
+                    document.onmouseup = null;
+                }
+                document.onmouseup = function(e){
+                    console.log('up');
+                    
+                    document.onmousemove = null;
+                    document.onmouseup = null;
+                }
+            } 
+        }
+    })
+    new Vue({
+        el: '#app',
+        data: {},
+    })
 </script>
+
+
+
