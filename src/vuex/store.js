@@ -6,7 +6,11 @@ Vue.use(Vuex)
 const state = {
     // 当前索引
     currentIndex: 0,
-    templateAttr: 'type="success"',
+    // 当前代码展示对象
+    currentCodeObj: {
+        id: -1,
+        show: false
+    },
     // 视图所有控件
     controls: [
        

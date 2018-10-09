@@ -5,7 +5,7 @@
                 <scene></scene>
             </el-col>
             <el-col :span='12' class="index-container-col">
-                <home></home>
+                <component :is="currentComponent"></component>
             </el-col>
             <el-col :span='6' class="index-container-col">
                     <attribute></attribute>
@@ -20,6 +20,7 @@
 <script>
     import scene from '@/page/scene/scene.vue'
     import home from '@/page/home/home.vue'
+    import codePage from '@/page/code/code.vue'
     import attribute from '@/page/attribute/attribute.vue'
     import control from '@/page/control/control.vue'
 
@@ -28,7 +29,16 @@
             scene,
             home,
             attribute,
-            control
+            control,
+            codePage
+        },
+        computed: {
+            currentComponent () {
+                if (this.$store.state.currentCodeObj.show) {
+                    return 'codePage'
+                }
+                return 'home'
+            }
         },
         mounted: function() {
             let clientHeight = document.body.clientHeight;

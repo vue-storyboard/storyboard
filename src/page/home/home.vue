@@ -1,5 +1,5 @@
 <template>
-    <div  class="home-container">
+    <div class="home-container">
         <draggable class="viewport" :options="{group:{ name:'control', pull:'', put:true }}" 
         @start="drag=true" @end="drag=false">
             <component v-for="(control, key) in controls" :key="key"   

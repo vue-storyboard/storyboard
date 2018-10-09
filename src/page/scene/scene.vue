@@ -79,6 +79,8 @@
     },
     methods: {
       showCode(data) {
+        this.$store.state.currentCodeObj.id = data.id
+        this.$store.state.currentCodeObj.show = !this.$store.state.currentCodeObj.show
         console.log('showCode')
       },
       rename(node, data) {
