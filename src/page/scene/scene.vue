@@ -7,7 +7,7 @@
         
         <span class="custom-tree-node" slot-scope="{ node, data }" >
           <span :node-id="node.id">
-            <input v-if="data.rename" style="width: 50px" @click.stop="" @focus.stop="" @blur.stop="onBlur($event,node)" type="text" value="">
+            <input v-if="data.rename" style="width: 50px" @click.stop="" @focus.stop="" @blur.stop="onBlur($event,node)" type="text" :value="data.label">
             <span v-else>{{data.label}}</span>
           </span>
           <span v-if="data.pid==0">
