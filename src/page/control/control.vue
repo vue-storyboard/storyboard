@@ -82,17 +82,18 @@
 
 <style scoped>
     .control-container {
-        background-color: #ffffff;
+        background-color: #eeeeee;
         height: 50%;
     }
     .control-container .title {
         color: black;
         font-size: 18px;
-        border-bottom: 1px solid #eeeeee;
+        border-top: 1px solid #cccccc;
+        border-bottom: 1px solid #dddddd;
         height: 5%;
     }
     .control-container-box {
-        background-color:#bbbbbb;
+        background-color:#eeeeee;
         height: 95%;
         text-align: center;
     }

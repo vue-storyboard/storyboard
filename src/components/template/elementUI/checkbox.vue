@@ -7,7 +7,7 @@
 <script>
     import Vue from 'vue'
 
-    Vue.component('sb-el-slider', {
+    Vue.component('sb-el-checkbox', {
         props: [
             'attribute',
             'initial',
@@ -43,7 +43,7 @@
                     attrs += (codeKey + '="' + this.attribute[key].value + '" ')
                 }
             }
-            
+       
             var eleFun = function () { 
                  return { 
                     data() {
@@ -51,7 +51,7 @@
                             value: self.value
                         }
                     },
-                    template: `<el-slider v-model="value" ${attrs}  @click.native.prevent="click"></el-slider>` ,
+                    template: `<el-checkbox v-model="value" ${attrs}  @click.native.prevent="click"></el-checkbox>` ,
                     methods: {
                         click (evt) {
                             self._click(evt)

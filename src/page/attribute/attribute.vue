@@ -15,9 +15,6 @@
 
             }
         },
-        components: {
-
-        },
         computed: {
             selectedControl () {
                 if (this.$store.state.controls.length > 0) {

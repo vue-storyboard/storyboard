@@ -7,7 +7,7 @@
 <script>
     import Vue from 'vue'
 
-    Vue.component('sb-el-slider', {
+    Vue.component('sb-el-select', {
         props: [
             'attribute',
             'initial',
@@ -15,7 +15,7 @@
         ],
         data() {
             return {
-                value: 10
+                value: ''
             }
         },
         computed: {
@@ -51,7 +51,7 @@
                             value: self.value
                         }
                     },
-                    template: `<el-slider v-model="value" ${attrs}  @click.native.prevent="click"></el-slider>` ,
+                    template: `<el-select v-model="value" ${attrs}  @click.native.prevent="click"></el-select>` ,
                     methods: {
                         click (evt) {
                             self._click(evt)

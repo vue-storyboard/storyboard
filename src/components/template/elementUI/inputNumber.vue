@@ -7,7 +7,7 @@
 <script>
     import Vue from 'vue'
 
-    Vue.component('sb-el-slider', {
+    Vue.component('sb-el-input-number', {
         props: [
             'attribute',
             'initial',
@@ -32,9 +32,9 @@
                 } 
 
                 if (this.attribute[key].type == 'boolean') {
-                    if (this.attribute[key].value) {
+                    // if (this.attribute[key].value) {
                        attrs += (':' + codeKey + '="' + this.attribute[key].value + '" ')
-                    }
+                    // }
                 }
                 else if (this.attribute[key].type == 'number') {
                     attrs += (':' + codeKey + '="' + this.attribute[key].value + '" ')
@@ -43,6 +43,7 @@
                     attrs += (codeKey + '="' + this.attribute[key].value + '" ')
                 }
             }
+            console.log('input', attrs);
             
             var eleFun = function () { 
                  return { 
@@ -51,7 +52,7 @@
                             value: self.value
                         }
                     },
-                    template: `<el-slider v-model="value" ${attrs}  @click.native.prevent="click"></el-slider>` ,
+                    template: `<el-input-number v-model="value" ${attrs}  @click.native.prevent="click"></el-input-number>` ,
                     methods: {
                         click (evt) {
                             self._click(evt)
