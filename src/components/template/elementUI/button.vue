@@ -1,0 +1,70 @@
+<template>
+    <div>
+
+    </div>
+</template>
+
+<script>
+    import Vue from 'vue'
+
+    Vue.component('sb-el-button', {
+        props: [
+            'attribute',
+            'initial',
+            'index'
+        ],
+        data() {
+            return {
+        
+            }
+        },
+        computed: {
+   
+        },
+        render: function(createElement) {
+            let self = this;
+            let attrs = ''
+
+            for (let key in this.attribute) {
+                if (this.attribute[key].type == 'boolean') {
+                    if (this.attribute[key].value) {
+                        attrs += (key + ' ')
+                    }
+                } else {
+                    attrs += (key + '="' + this.attribute[key].value + '" ')
+                }
+            }
+
+            var eleFun = function () { 
+                 return { 
+                    template: `<el-button ${attrs} @click=click>${self.attribute['text'].value}</el-button>` ,
+                    methods: {
+                        click (evt) {
+                            self._click(evt)
+                        }
+                    }
+                } 
+            } 
+            return createElement(eleFun())
+        },
+
+        methods: {
+            _click (evt) {
+
+                if (this.initial === true) {
+                    return
+                }
+               this.$store.state.currentIndex = this.index
+               this.$emit('click', evt)
+            }
+        }
+    })
+
+    export default {
+
+    }
+</script>
+
+<style scoped>
+
+</style>

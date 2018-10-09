@@ -25,19 +25,25 @@
     import Vue from 'vue';
     import draggable from 'vuedraggable'
     import store from '@/vuex/store'
-    import elButton from '@/components/elementUI/el-button.vue'
-    import elRadio from '@/components/elementUI/el-radio.vue'
-    import elSwitch from '@/components/elementUI/el-switch.vue'
-    import controls from '@/components/elementUI/control/control.js'
+    import elButton from '@/components/template/elementUI/button.vue'
+    import elRadio from '@/components/template/elementUI/radio.vue'
+    import elSwitch from '@/components/template/elementUI/switch.vue'
+    import controls from '@/components/template/elementUI/control/control.js'
 
     export default {
         data() {
             return {
-                controls: controls,
                 rowArray: [true],
             }
         },
         computed: {
+            controls () {
+                var arr = []
+                for (let i in controls) {
+                    arr.push(controls[i]); 
+                }
+                return arr
+            },
             showCol: function() {
                 return 3
             },

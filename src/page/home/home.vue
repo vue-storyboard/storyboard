@@ -28,7 +28,6 @@
 <script>
     import draggable from 'vuedraggable'
     import device from '@/service/device.js'
-    import elementUI from '@/components/elementUI/el-button.vue'
  
     export default {
         data() {

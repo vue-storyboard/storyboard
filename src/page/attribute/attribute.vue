@@ -6,10 +6,10 @@
 </template>
 
 <script>
-    import blankAttribute from '@/components/elementUI/attribute/blank.vue'
-    import buttonAttribute from '@/components/elementUI/attribute/button.vue'
-    import radioAttribute from '@/components/elementUI/attribute/radio.vue'
-    import switchAttribute from '@/components/elementUI/attribute/switch.vue'
+    import blankAttribute from '@/components/template/elementUI/attribute/blank.vue'
+    import buttonAttribute from '@/components/template/elementUI/attribute/button.vue'
+    import radioAttribute from '@/components/template/elementUI/attribute/radio.vue'
+    import switchAttribute from '@/components/template/elementUI/attribute/switch.vue'
 
     export default {
         data() {
@@ -28,7 +28,6 @@
                 if (this.$store.state.controls.length > 0) {
                     let name = this.$store.state.controls[this.$store.state.currentIndex].name
                     let names = name.split('-')
-                    // console.log(this.$store.state.currentIndex, names[names.length - 1] + 'Attribute')
                     return names[names.length - 1] + 'Attribute'
                 }
                 return blankAttribute
