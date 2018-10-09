@@ -5,6 +5,7 @@ import Switch from './switch'
 import Slider from './slider'
 import Checkbox from './checkbox'
 import Select from './select'
+import Div from './div'
 
 let attribute = {
     Blank,
@@ -13,7 +14,8 @@ let attribute = {
     Switch,
     Slider,
     Checkbox,
-    Select
+    Select,
+    Div
 }
 
 export default attribute

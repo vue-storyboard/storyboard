@@ -43,7 +43,7 @@
                     attrs += (codeKey + '="' + this.attribute[key].value + '" ')
                 }
             }
-            console.log('input', attrs);
+          
             
             var eleFun = function () { 
                  return { 

@@ -59,15 +59,7 @@ let control = {
                 value: false
             }
         },
-        step: {
-            type: 'number',
-            value: 0,
-            default: {
-                type: 'number',
-                value: 1
-            }
-        },
-       
+   
     },
 }
 

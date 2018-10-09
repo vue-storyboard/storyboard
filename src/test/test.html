@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    div {
+        background-color: aqua;
+        width: 60px;
+        height: 60px;
+    }
+</style>
+<body>
+        <!-- onmousedown 	script 	当元素上按下鼠标按钮时触发。
+        onmousemove 	script 	当鼠标指针移动到元素上时触发。
+        onmouseout 	script 	当鼠标指针移出元素时触发。
+        onmouseover 	script 	当鼠标指针移动到元素上时触发。
+        onmouseup 	script 	当在元素上释放鼠标按钮时触发。 -->
+    <div 
+    onmousedown="onMouseDown()" 
+    onmousemove="onMouseMove()" 
+    onmouseout="onMouseOut()" 
+    onmouseover="onMouseOver()" 
+    onmouseup="onMouseUp()">div</div>
+</body>
+</html>
+<script>
+    var inContainer = false
+    var touchingContainer = false
+    function onMouseDown() {
+       console.log('onMouseDown 	当元素上按下鼠标按钮时触发');
+        
+    }
+    function onMouseMove() {
+       console.log('onMouseMove 	当鼠标指针移动到元素上时触发。');
+        
+    }
+    function onMouseOut() {
+        inContainer = false
+       console.log('onMouseOut 	当鼠标指针移出元素时触发。');
+        
+    }
+    function onMouseOver() {
+        inContainer = true
+       console.log('onMouseOver 	当鼠标指针移动到元素上时触发。');
+        
+    }
+    function onMouseUp() {
+       console.log('onMouseUp 	当在元素上释放鼠标按钮时触发。');
+        
+    }
+</script>

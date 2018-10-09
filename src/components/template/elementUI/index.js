@@ -5,6 +5,7 @@ import Slider from './slider'
 import Checkbox from './checkbox'
 import InputNumber from './inputNumber'
 import Select from './select'
+import Div from './div'
 
 let components = {
     Button,
@@ -13,7 +14,8 @@ let components = {
     Slider,
     Checkbox,
     InputNumber,
-    Select
+    Select,
+    Div
 }
 
 export default components
