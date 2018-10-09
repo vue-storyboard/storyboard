@@ -6,11 +6,9 @@
 </template>
 
 <script>
-    import blankAttribute from '@/components/template/elementUI/attribute/blank.vue'
-    import buttonAttribute from '@/components/template/elementUI/attribute/button.vue'
-    import radioAttribute from '@/components/template/elementUI/attribute/radio.vue'
-    import switchAttribute from '@/components/template/elementUI/attribute/switch.vue'
 
+    import attribute from '@/components/template/elementUI/attribute/index'
+    
     export default {
         data() {
             return {
@@ -18,19 +16,15 @@
             }
         },
         components: {
-            buttonAttribute,
-            radioAttribute,
-            blankAttribute,
-            switchAttribute
+
         },
         computed: {
             selectedControl () {
                 if (this.$store.state.controls.length > 0) {
-                    let name = this.$store.state.controls[this.$store.state.currentIndex].name
-                    let names = name.split('-')
-                    return names[names.length - 1] + 'Attribute'
+                    let name = this.$store.state.controls[this.$store.state.currentIndex].type
+                    return attribute[name.charAt(0).toUpperCase() + name.slice(1)]
                 }
-                return blankAttribute
+                return attribute['Blank']
             }
         }
     }

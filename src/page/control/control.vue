@@ -25,9 +25,7 @@
     import Vue from 'vue';
     import draggable from 'vuedraggable'
     import store from '@/vuex/store'
-    import elButton from '@/components/template/elementUI/button.vue'
-    import elRadio from '@/components/template/elementUI/radio.vue'
-    import elSwitch from '@/components/template/elementUI/switch.vue'
+    import components from '@/components/template/elementUI/index'
     import controls from '@/components/template/elementUI/control/control.js'
 
     export default {
