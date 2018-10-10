@@ -8,20 +8,24 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <style>
-#drag{
-    width: 300px;
-    height: 600px;
-    position: absolute;
-    top: 200px;
-    left: 130px;
-    border:2px solid #777;
-    border-radius: 2px;
-    background: #f3f3f3;
-}
+    #app {
+        background-color: bisque;
+        width: 300px;
+        height: 500px;
+        position: absolute;
+        left: 100px;
+    }
+    #drag{
+        width: 240px;
+        height: 400px;
+        position: relative;
+        top: 50px;
+        left: 30px;
+        background: #f3f3f3;
+    }
 </style>
-<div id="app">
-    <div id="drag" >
-      <div class="toolBarTitle move" v-drag>移动工具栏</div>
+<div id="app" >
+    <div width="250" id="drag" v-drag>
     </div>
 </div>
 
@@ -29,35 +33,110 @@
 
     Vue.directive('drag', {
         inserted: function(el){
-            el.onmousedown = function(e){
-                console.log('down', '')
-                // 获取鼠标点击处分别与div左边和上边的距离：鼠标位置-div位置
-                var divx = e.clientX - document.getElementById('drag').offsetLeft;
-                var divy = e.clientY - document.getElementById('drag').offsetTop;
-                //包含在onmousedown里，表示点击后才移动，为防止鼠标移出div，使用document.onmousemove
-                document.onmousemove = function(e){
-                    console.log('move');
-                    
-                    //获取移动后div的位置：鼠标位置-divx/divy
-                    var l = e.clientX - divx;
-                    var t = e.clientY - divy;
-                    document.getElementById('drag').style.left=l+'px';
-                    document.getElementById('drag').style.top=t+'px';
+
+            var oldStyle = el.style
+            el.onmousedown = function(evt){
+                var clickX = evt.clientX - el.offsetLeft;
+                var clickY = evt.clientY - el.offsetTop;
+                document.onmousemove = function(evt){
+                    onDomChange(el, evt, clickX, clickY)
                 }
-                document.onmouseout = function(e){
-                    console.log('onmouseout');
-                    
-                    document.onmousemove = null;
-                    document.onmouseup = null;
-                }
-                document.onmouseup = function(e){
-                    console.log('up');
-                    
+  
+                document.onmouseup = function(evt){
                     document.onmousemove = null;
                     document.onmouseup = null;
                 }
             } 
-        }
+            el.ondblclick = function(evt) {
+                if (el.offsetLeft == 0 && 
+                    el.offsetRight == 0 &&
+                    el.offsetBottom == 0 &&
+                    el.offsetTop == 0 ) {
+                        
+                       el.style = oldStyle
+                    } else {
+                        el.style.width = '100%'
+                        el.style.height = '100%'
+                        el.style.top = 0
+                        el.style.left = 0
+                        el.style.right = 0
+                        el.style.bottom = 0
+                    }
+               
+            }
+            
+            var onDomChange = function (dom, evt, clickX, clickY) {
+                var diffOffest = 50
+                var edgeBorderStyle = "1px solid #ff0000"
+                var defaultBorderStyle = ''
+
+                // left
+                if (Math.abs(evt.clientX - dom.getBoundingClientRect().left) <= diffOffest) {
+                    dom.style.borderLeft = edgeBorderStyle;
+                    var beforeWidth = dom.scrollWidth
+                    var beforeLeft = dom.offsetLeft
+                    var offest = evt.clientX - dom.getBoundingClientRect().left
+                
+                    dom.style.left = (dom.offsetLeft + offest) + 'px'
+                    dom.style.width = (dom.scrollWidth - (dom.offsetLeft - beforeLeft)) + 'px'
+              
+                    if (dom.scrollWidth < beforeWidth) {
+                        dom.style.cursor = 'e-resize'
+                    } else {
+                        dom.style.cursor = 'w-resize'
+                    }
+                } 
+                // right 
+                else if (Math.abs(evt.clientX - dom.getBoundingClientRect().right) <= diffOffest) {
+                    dom.style.borderRight = edgeBorderStyle;
+                    var beforeWidth = dom.scrollWidth
+                    dom.style.width = (evt.clientX - dom.getBoundingClientRect().left) + 'px'
+                    if (dom.scrollWidth <= beforeWidth) {
+                        dom.style.cursor = 'w-resize'
+                    } else {
+                        dom.style.cursor = 'e-resize'
+                    }
+                } 
+                // top 
+                else if (Math.abs(evt.clientY - dom.getBoundingClientRect().top) <= diffOffest) {
+                    dom.style.borderTop = edgeBorderStyle;
+                    var beforeHeight = dom.scrollHeight
+                    var beforeTop = dom.offsetTop
+                    var offest = evt.clientY - dom.getBoundingClientRect().top
+                
+                    dom.style.top = (dom.offsetTop + offest) + 'px'
+                    dom.style.height = (dom.scrollHeight - (dom.offsetTop - beforeTop)) + 'px'
+              
+                    if (dom.scrollHeight < beforeHeight) {
+                        dom.style.cursor = 's-resize'
+                    } else {
+                        dom.style.cursor = 'n-resize'
+                    }
+                } 
+                // bottom 
+                else if (Math.abs(evt.clientY - dom.getBoundingClientRect().bottom) <= diffOffest) {
+                    dom.style.borderBottom = edgeBorderStyle;
+                    var beforeHeight = dom.scrollHeight
+                    dom.style.height = (evt.clientY - dom.getBoundingClientRect().top) + 'px'
+                    if (dom.scrollHeight <= beforeHeight) {
+                        dom.style.cursor = 'n-resize'
+                    } else {
+                        dom.style.cursor = 's-resize'
+                    }
+                } 
+                else {
+                    dom.style.border = defaultBorderStyle;
+                    dom.style.cursor = 'default'
+                    var left = evt.clientX - clickX;
+                    var top = evt.clientY - clickY;
+                    el.style.left = left+'px';
+                    el.style.top = top+'px';
+                }
+                
+            }
+    
+        },
+   
     })
     new Vue({
         el: '#app',
