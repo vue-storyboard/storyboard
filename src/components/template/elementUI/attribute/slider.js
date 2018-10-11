@@ -1,6 +1,7 @@
 let attribute = {
     type: 'slider',
     name: 'sb-el-slider',
+    show: false,
     attribute: {
         min: {
             type: 'number',

@@ -1,6 +1,7 @@
 let attribute = {
     type: 'div',
     name: 'sb-div',
+    show: false,
     attribute: {
         text: {
             type: 'string',
@@ -14,11 +15,23 @@ let attribute = {
             type: 'css',
             value: {
                 width: {
-                    type: 'number',
+                    type: 'string',
                     value: '50',
+                    unit: 'px',
                     default: {
-                        type: 'number',
-                        value: '50'
+                        type: 'string',
+                        value: '200',
+                        unit: 'px',
+                    }
+                },
+                height: {
+                    type: 'string',
+                    value: '50',
+                    unit: 'px',
+                    default: {
+                        type: 'string',
+                        value: '50',
+                        unit: 'px',
                     }
                 },
                 backgroundColor: {
@@ -27,7 +40,8 @@ let attribute = {
                     alias: 'background-color',
                     default: {
                         type: 'color',
-                        value: ''
+                        value: 'green',
+                        alias: 'background-color',
                     }
                 }   
             },

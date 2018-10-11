@@ -1,6 +1,7 @@
 let attribute = {
     type: 'radio',
     name: 'sb-el-radio',
+    show: false,
     attribute: {
         text: {
             type: 'string',
@@ -39,7 +40,8 @@ let attribute = {
             value: 'small',
             default: {
                 type: 'array',
-                value: [
+                value: 'mini',
+                option: [
                     "medium",
                     "small",
                     "mini"

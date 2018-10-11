@@ -6,10 +6,12 @@
 
 <script>
     import Vue from 'vue'
+    import control from './common.js'
 
     Vue.component('sb-div', {
         props: [
             'attribute',
+            'control',
             'initial',
             'index'
         ],
@@ -31,11 +33,31 @@
                     if (this.attribute.style.value[key].value) {
                         attrs += (codeKey + ' ')
                     }
-                } else if (this.attribute.style.value[key].type == 'number') {
-                    attrs += (codeKey + ':' + this.attribute.style.value[key].value + 'px; ')
                 } 
                 else {
-                    attrs += (codeKey + ':' + this.attribute.style.value[key].value + '; ')
+                    if (this.attribute.style.value[key].show) {
+                        if (this.attribute.style.value[key].hasOwnProperty('unit')) {
+                            let unit = this.attribute.style.value[key].unit
+                            if (control.isPercentEnd(this.attribute.style.value[key].value)) {
+                                unit = ''
+                            }
+                            attrs += (codeKey + ':' + this.attribute.style.value[key].value + unit + '; ')
+                        } else {
+                            attrs += (codeKey + ':' + this.attribute.style.value[key].value + '; ')
+                        }
+                    } else {
+                        if (this.attribute.style.value[key].default.value.hasOwnProperty('unit')) {
+                            let unit = this.attribute.style.value[key].default.value.unit
+                            if (control.isPercentEnd(this.attribute.style.value[key].default.value.value)) {
+                                unit = ''
+                            }
+                            attrs += (codeKey + ':' + this.attribute.style.value[key].default.value + unit + '; ')
+                        } else {
+                            attrs += (codeKey + ':' + this.attribute.style.value[key].default.value + '; ')
+                        }
+                    }
+              
+                    
                 }
             
             }

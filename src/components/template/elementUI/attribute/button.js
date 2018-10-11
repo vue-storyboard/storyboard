@@ -1,9 +1,9 @@
 import icons from '@/service/icon.js'
 
 let attribute = {
-    
     type: 'button',
     name: 'sb-el-button',
+    show: false,
     attribute: {
         text: {
             type: 'string',
@@ -18,7 +18,8 @@ let attribute = {
             value: '',
             default: {
                 type: 'array',
-                value: [
+                value: '',
+                option: [
                     "primary",
                     "success",
                     "info",
@@ -73,7 +74,8 @@ let attribute = {
             value: 'small',
             default: {
                 type: 'array',
-                value: [
+                value: 'mini',
+                option: [
                     "medium",
                     "small",
                     "mini"

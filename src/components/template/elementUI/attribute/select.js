@@ -1,6 +1,7 @@
 let attribute = {
     type: 'select',
     name: 'sb-el-select',
+    show: false,
     attribute: {
        
         label: {

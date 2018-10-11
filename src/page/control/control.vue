@@ -10,6 +10,7 @@
                             <component
                                 :initial="true"
                                 :id="rowKey * showCol + colKey"
+                                :control="controls[rowKey * showCol + colKey]"
                                 :attribute="controls[rowKey * showCol + colKey].attribute" 
                                 :is="controls[rowKey * showCol + colKey].name">
                             </component>
@@ -65,15 +66,19 @@
         methods: {
             onEnd (evt,ee) {
                 
-            if (this.$store.state.currentAddControl) {
-                let control = JSON.parse(JSON.stringify(this.controls[evt.item.id]))
-                let showCount = this.$store.state.controls.length
-                control.index = showCount
-                this.$store.state.currentControl = control
-                this.$store.state.currentIndex = showCount
-                this.$store.state.controls.push(this.$store.state.currentControl)
-                
-            }
+                if (this.$store.state.currentAddControl) {
+                    let control = JSON.parse(JSON.stringify(this.controls[evt.item.id]))
+                    console.log('cc', control);
+                    
+                    let showCount = this.$store.state.controls.length
+                    control.index = showCount
+                    control.show = true
+
+                    this.$store.state.currentControl = control
+                    this.$store.state.currentIndex = showCount
+                    this.$store.state.controls.push(this.$store.state.currentControl)
+                    
+                }
                 this.$store.state.currentAddControl = false
             },
             onStart (evt) {

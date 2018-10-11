@@ -65,7 +65,8 @@ let attribute = {
             value: 'small',
             default: {
                 type: 'array',
-                value: [
+                value: 'mini',
+                option: [
                     "medium",
                     "small",
                     "mini"

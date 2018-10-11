@@ -4,7 +4,8 @@
         @start="drag=true" @add="onAdd">
             <component v-for="(control, key) in controls" :key="key"   
                 :index="control.index" 
-                :is="control.name" 
+                :is="control.name"
+                :control="control"
                 :attribute="control.attribute">
             </component>
         </draggable>

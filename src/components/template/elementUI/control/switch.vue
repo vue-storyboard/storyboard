@@ -6,10 +6,12 @@
 
 <script>
     import Vue from 'vue'
+    import uiControl from './common.js'
 
     Vue.component('sb-el-switch', {
         props: [
             'attribute',
+            'control',
             'initial',
             'index'
         ],
@@ -23,24 +25,8 @@
         },
         render: function(createElement) {
             let self = this;
-            let attrs = ''
-            
-            for (let key in this.attribute) {
+            let attrs = uiControl.getAttr(this.control)
 
-                let codeKey = key
-                if (this.attribute[key].hasOwnProperty('alias')) {
-                    codeKey = this.attribute[key].alias
-                } 
-
-                if (this.attribute[key].type == 'boolean') {
-                    if (this.attribute[key].value) {
-                        attrs += (codeKey + ' ')
-                    }
-                } else {
-                    attrs += (codeKey + '="' + this.attribute[key].value + '" ')
-                }
-            }
-       
             var eleFun = function () { 
                  return { 
                     data() {

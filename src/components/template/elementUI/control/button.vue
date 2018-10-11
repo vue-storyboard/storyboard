@@ -6,10 +6,12 @@
 
 <script>
     import Vue from 'vue'
+    import uiControl from './common.js'
 
     Vue.component('sb-el-button', {
         props: [
             'attribute',
+            'control',
             'initial',
             'index'
         ],
@@ -23,17 +25,7 @@
         },
         render: function(createElement) {
             let self = this;
-            let attrs = ''
-
-            for (let key in this.attribute) {
-                if (this.attribute[key].type == 'boolean') {
-                    if (this.attribute[key].value) {
-                        attrs += (key + ' ')
-                    }
-                } else {
-                    attrs += (key + '="' + this.attribute[key].value + '" ')
-                }
-            }
+            let attrs = uiControl.getAttr(this.control)
 
             var eleFun = function () { 
                  return { 

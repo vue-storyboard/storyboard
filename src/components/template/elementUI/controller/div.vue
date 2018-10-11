@@ -18,7 +18,7 @@
                 <div v-else-if="attr.default.type === 'array'">
                     <el-select size="mini" v-model="attribute[key].value" placeholder="请选择">
                         <el-option
-                        v-for="item in attribute[key].default.value"
+                        v-for="item in attribute[key].default.option"
                         :key="item"
                         :label="item"
                         :value="item">
@@ -53,7 +53,7 @@
                             <div v-else-if="style.default.type === 'array'">
                                 <el-select size="mini" v-model="attribute.style.value[styleKey].value" placeholder="请选择">
                                     <el-option
-                                    v-for="item in attribute.style.value[styleKey].value"
+                                    v-for="item in attribute.style.value[styleKey].option"
                                     :key="item"
                                     :label="item"
                                     :value="item">

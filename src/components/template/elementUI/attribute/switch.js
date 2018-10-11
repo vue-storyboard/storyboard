@@ -1,6 +1,7 @@
 let attribute = {
     type: 'switch',
     name: 'sb-el-switch',
+    show: false,
     attribute: {
         text: {
             type: 'string',
