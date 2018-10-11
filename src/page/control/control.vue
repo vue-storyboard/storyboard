@@ -5,8 +5,8 @@
             <el-row v-for="(row, rowKey) in showRow" :key="rowKey" >
                 <el-col v-for="(col, colKey) in showCol" :key="colKey" :span='24 / showCol'>
                     <div v-if="rowKey * showCol + colKey < controls.length">
-                        <draggable :options="{group:{ name:'control',  pull:'', put:false }}" 
-                        @start="drag=true" @end="onEnd" @choose="onChoose">
+                        <draggable :options="{group:{ name:'control',  pull:'clone', put:false }}" 
+                        @start="onStart" @end="onEnd" @choose="onChoose">
                             <component
                                 :initial="true"
                                 :id="rowKey * showCol + colKey"
@@ -22,7 +22,7 @@
 </template>
 
 <script>
-    import Vue from 'vue';
+    import Vue from 'vue'
     import draggable from 'vuedraggable'
     import store from '@/vuex/store'
     import components from '@/components/template/elementUI/control/index'
@@ -63,18 +63,25 @@
       
         },
         methods: {
-            onEnd (evt) {
+            onEnd (evt,ee) {
+                
+            if (this.$store.state.currentAddControl) {
                 let control = JSON.parse(JSON.stringify(this.controls[evt.item.id]))
                 let showCount = this.$store.state.controls.length
                 control.index = showCount
-                this.$store.state.controls.push(control)
+                this.$store.state.currentControl = control
                 this.$store.state.currentIndex = showCount
+                this.$store.state.controls.push(this.$store.state.currentControl)
+                
+            }
+                this.$store.state.currentAddControl = false
             },
             onStart (evt) {
-                // console.log('onStart')
+            //    console.log('onStart')
+
             },
             onChoose (evt) {
-               //  console.log('onChoose')
+                // console.log('onChoose')
             },
         }
     }

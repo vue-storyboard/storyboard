@@ -13,7 +13,7 @@ let attributes = {
     Switch,
     Slider,
     Checkbox,
-    InputNumber,
+    // InputNumber,
     Select,
     Div
 

@@ -13,6 +13,14 @@ let attribute = {
         style: {
             type: 'css',
             value: {
+                width: {
+                    type: 'number',
+                    value: '50',
+                    default: {
+                        type: 'number',
+                        value: '50'
+                    }
+                },
                 backgroundColor: {
                     type: 'color',
                     value: 'red',

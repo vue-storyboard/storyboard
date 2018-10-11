@@ -31,15 +31,18 @@
                     if (this.attribute.style.value[key].value) {
                         attrs += (codeKey + ' ')
                     }
-                } else {
-                    attrs += (codeKey + ':' + this.attribute.style.value[key].value + ' ')
+                } else if (this.attribute.style.value[key].type == 'number') {
+                    attrs += (codeKey + ':' + this.attribute.style.value[key].value + 'px; ')
+                } 
+                else {
+                    attrs += (codeKey + ':' + this.attribute.style.value[key].value + '; ')
                 }
             
             }
             
             var eleFun = function () { 
                  return { 
-                    template: `<div style="${attrs}" @click.native.prevent=click>${self.attribute['text'].default.value}</div>` ,
+                    template: `<div style="${attrs}" @click.native.prevent=click>${self.attribute['text'].value}</div>` ,
                     methods: {
                         click (evt) {
                             self._click(evt)

@@ -60,6 +60,9 @@
                                     </el-option>
                                 </el-select>
                             </div>
+                            <div v-else-if="style.default.type === 'number'">
+                                <el-input v-model="attribute.style.value[styleKey].value" size="mini" placeholder="请输入内容" type="number"></el-input>
+                            </div>
                             <div v-else-if="style.default.type === 'color'">
                                 <el-col :span='18'>
                                     <el-input v-model="attribute.style.value[styleKey].value"  size="mini" placeholder="请输入颜色"></el-input>

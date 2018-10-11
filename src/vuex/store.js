@@ -6,6 +6,10 @@ Vue.use(Vuex)
 const state = {
     // 当前索引
     currentIndex: 0,
+    // 是否添加控件
+    currentAddControl: false,
+    
+    currentControl: {},
     // 当前代码展示对象
     currentCodeObj: {
         id: -1,

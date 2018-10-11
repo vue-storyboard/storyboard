@@ -8,31 +8,39 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <style>
+    * {
+        border: 0;
+        margin: 0;
+    
+    }
     #app {
         background-color: bisque;
         width: 300px;
         height: 500px;
-        position: absolute;
-        left: 100px;
+        /* position: absolute; */
+        /* left: 100px; */
     }
     #drag{
         width: 240px;
-        height: 400px;
-        position: relative;
+        /* height: 400px; */
+        /* position: relative;
         top: 50px;
-        left: 30px;
+        left: 30px; */
         background: #f3f3f3;
     }
 </style>
 <div id="app" >
-    <div width="250" id="drag" v-drag>
+    <div width="250" id="drag" v-resize:demo>
+        ggg
     </div>
 </div>
 
 <script>
 
-    Vue.directive('drag', {
-        inserted: function(el){
+    Vue.directive('resize', {
+
+        inserted: function(el, binding, vnode){
+
             var elOldBoundingClientRect = {
                 left: el.offsetLeft,
                 top: el.offsetTop,
@@ -43,6 +51,8 @@
             el.onmousedown = function(evt){
                 var clickX = evt.clientX - el.offsetLeft;
                 var clickY = evt.clientY - el.offsetTop;
+                console.log(el.getBoundingClientRect());
+                
                 document.onmousemove = function(evt){
                     onDomChange(el, evt, clickX, clickY)
                 }
@@ -80,44 +90,45 @@
                 var diffOffest = 50
                 var edgeBorderStyle = "1px solid #ff0000"
                 var defaultBorderStyle = ''
-
-                // left top
-                if (Math.abs(evt.clientX - dom.getBoundingClientRect().left) <= diffOffest && 
-                    Math.abs(evt.clientY - dom.getBoundingClientRect().top) <= diffOffest) {
-                    dom.style.borderLeft = edgeBorderStyle;
-                    var beforeWidth = dom.scrollWidth
-                    var beforeLeft = dom.offsetLeft
-                    var offest = evt.clientX - dom.getBoundingClientRect().left
+                console.log(evt);
                 
-                    dom.style.left = (dom.offsetLeft + offest) + 'px'
-                    dom.style.width = (dom.scrollWidth - (dom.offsetLeft - beforeLeft)) + 'px'
+                // // left top
+                // if (Math.abs(evt.clientX - dom.getBoundingClientRect().left) <= diffOffest && 
+                //     Math.abs(evt.clientY - dom.getBoundingClientRect().top) <= diffOffest) {
+                //     dom.style.borderLeft = edgeBorderStyle;
+                //     var beforeWidth = dom.scrollWidth
+                //     var beforeLeft = dom.offsetLeft
+                //     var offest = evt.clientX - dom.getBoundingClientRect().left
+                
+                //     dom.style.left = (dom.offsetLeft + offest) + 'px'
+                //     dom.style.width = (dom.scrollWidth - (dom.offsetLeft - beforeLeft)) + 'px'
               
-                    dom.style.borderTop = edgeBorderStyle;
-                    var beforeHeight = dom.scrollHeight
-                    var beforeTop = dom.offsetTop
-                    var offest = evt.clientY - dom.getBoundingClientRect().top
+                //     dom.style.borderTop = edgeBorderStyle;
+                //     var beforeHeight = dom.scrollHeight
+                //     var beforeTop = dom.offsetTop
+                //     var offest = evt.clientY - dom.getBoundingClientRect().top
                 
-                    dom.style.top = (dom.offsetTop + offest) + 'px'
-                    dom.style.height = (dom.scrollHeight - (dom.offsetTop - beforeTop)) + 'px'
-                } 
-                // left bottom
-                else if (Math.abs(evt.clientX - dom.getBoundingClientRect().left) <= diffOffest &&
-                        Math.abs(evt.clientY - dom.getBoundingClientRect().bottom) <= diffOffest) {
-                    dom.style.borderLeft = edgeBorderStyle;
-                    var beforeWidth = dom.scrollWidth
-                    var beforeLeft = dom.offsetLeft
-                    var offest = evt.clientX - dom.getBoundingClientRect().left
+                //     dom.style.top = (dom.offsetTop + offest) + 'px'
+                //     dom.style.height = (dom.scrollHeight - (dom.offsetTop - beforeTop)) + 'px'
+                // } 
+                // // left bottom
+                // else if (Math.abs(evt.clientX - dom.getBoundingClientRect().left) <= diffOffest &&
+                //         Math.abs(evt.clientY - dom.getBoundingClientRect().bottom) <= diffOffest) {
+                //     dom.style.borderLeft = edgeBorderStyle;
+                //     var beforeWidth = dom.scrollWidth
+                //     var beforeLeft = dom.offsetLeft
+                //     var offest = evt.clientX - dom.getBoundingClientRect().left
                 
-                    dom.style.left = (dom.offsetLeft + offest) + 'px'
-                    dom.style.width = (dom.scrollWidth - (dom.offsetLeft - beforeLeft)) + 'px'
+                //     dom.style.left = (dom.offsetLeft + offest) + 'px'
+                //     dom.style.width = (dom.scrollWidth - (dom.offsetLeft - beforeLeft)) + 'px'
               
-                    dom.style.borderBottom = edgeBorderStyle;
-                    var beforeHeight = dom.scrollHeight
-                    dom.style.height = (evt.clientY - dom.getBoundingClientRect().top) + 'px'
-                } 
+                //     dom.style.borderBottom = edgeBorderStyle;
+                //     var beforeHeight = dom.scrollHeight
+                //     dom.style.height = (evt.clientY - dom.getBoundingClientRect().top) + 'px'
+                // } 
                 
                 // left
-                else if (Math.abs(evt.clientX - dom.getBoundingClientRect().left) <= diffOffest) {
+                 if (Math.abs(evt.clientX - dom.getBoundingClientRect().left) <= diffOffest) {
                     dom.style.borderLeft = edgeBorderStyle;
                     var beforeWidth = dom.scrollWidth
                     var beforeLeft = dom.offsetLeft
@@ -132,31 +143,31 @@
                         dom.style.cursor = 'w-resize'
                     }
                 } 
-                // right top
-                else if (Math.abs(evt.clientX - dom.getBoundingClientRect().right) <= diffOffest &&
-                        Math.abs(evt.clientY - dom.getBoundingClientRect().top) <= diffOffest) {
-                    dom.style.borderRight = edgeBorderStyle;
-                    var beforeWidth = dom.scrollWidth
-                    dom.style.width = (evt.clientX - dom.getBoundingClientRect().left) + 'px'
+                // // right top
+                // else if (Math.abs(evt.clientX - dom.getBoundingClientRect().right) <= diffOffest &&
+                //         Math.abs(evt.clientY - dom.getBoundingClientRect().top) <= diffOffest) {
+                //     dom.style.borderRight = edgeBorderStyle;
+                //     var beforeWidth = dom.scrollWidth
+                //     dom.style.width = (evt.clientX - dom.getBoundingClientRect().left) + 'px'
 
-                    dom.style.borderTop = edgeBorderStyle;
-                    var beforeHeight = dom.scrollHeight
-                    var beforeTop = dom.offsetTop
-                    var offest = evt.clientY - dom.getBoundingClientRect().top
-                    dom.style.top = (dom.offsetTop + offest) + 'px'
-                    dom.style.height = (dom.scrollHeight - (dom.offsetTop - beforeTop)) + 'px'
-                }
-                // right bottom
-                else if (Math.abs(evt.clientX - dom.getBoundingClientRect().right) <= diffOffest &&
-                        Math.abs(evt.clientY - dom.getBoundingClientRect().bottom) <= diffOffest) {
-                    dom.style.borderRight = edgeBorderStyle;
-                    var beforeWidth = dom.scrollWidth
-                    dom.style.width = (evt.clientX - dom.getBoundingClientRect().left) + 'px'
+                //     dom.style.borderTop = edgeBorderStyle;
+                //     var beforeHeight = dom.scrollHeight
+                //     var beforeTop = dom.offsetTop
+                //     var offest = evt.clientY - dom.getBoundingClientRect().top
+                //     dom.style.top = (dom.offsetTop + offest) + 'px'
+                //     dom.style.height = (dom.scrollHeight - (dom.offsetTop - beforeTop)) + 'px'
+                // }
+                // // right bottom
+                // else if (Math.abs(evt.clientX - dom.getBoundingClientRect().right) <= diffOffest &&
+                //         Math.abs(evt.clientY - dom.getBoundingClientRect().bottom) <= diffOffest) {
+                //     dom.style.borderRight = edgeBorderStyle;
+                //     var beforeWidth = dom.scrollWidth
+                //     dom.style.width = (evt.clientX - dom.getBoundingClientRect().left) + 'px'
 
-                    dom.style.borderBottom = edgeBorderStyle;
-                    var beforeHeight = dom.scrollHeight
-                    dom.style.height = (evt.clientY - dom.getBoundingClientRect().top) + 'px'
-                } 
+                //     dom.style.borderBottom = edgeBorderStyle;
+                //     var beforeHeight = dom.scrollHeight
+                //     dom.style.height = (evt.clientY - dom.getBoundingClientRect().top) + 'px'
+                // } 
                 // right 
                 else if (Math.abs(evt.clientX - dom.getBoundingClientRect().right) <= diffOffest) {
                     dom.style.borderRight = edgeBorderStyle;
@@ -217,7 +228,17 @@
     })
     new Vue({
         el: '#app',
-        data: {},
+        data: {
+            demo: {
+                width: '100px'
+            }
+        },
+        watch: {
+            demo(newValue, oldValue) {
+                console.log(newValue, oldValue);
+                
+            }
+        },
     })
 </script>
 
