@@ -1,4 +1,4 @@
-let control = {
+let attribute = {
     type: 'checkbox',
     name: 'sb-el-checkbox',
     attribute: {
@@ -75,4 +75,4 @@ let control = {
     },
 }
 
-export default control
+export default attribute

@@ -1,25 +1,16 @@
-let control = {
-    type: 'select',
-    name: 'sb-el-select',
+let attribute = {
+    type: 'radio',
+    name: 'sb-el-radio',
     attribute: {
-       
+        text: {
+            type: 'string',
+            value: '',
+            default: {
+                type: 'string',
+                value: ''
+            }
+        }, 
         label: {
-            type: 'string',
-            value: '',
-            default: {
-                type: 'string',
-                value: ''
-            }
-        }, 
-        name: {
-            type: 'string',
-            value: '',
-            default: {
-                type: 'string',
-                value: ''
-            }
-        }, 
-        placeholder: {
             type: 'string',
             value: '',
             default: {
@@ -35,7 +26,7 @@ let control = {
                 value: false
             }
         },
-        multiple: {
+        border: {
             type: 'boolean',
             value: false,
             default: {
@@ -43,24 +34,19 @@ let control = {
                 value: false
             }
         },
-        filterable: {
-            type: 'boolean',
-            value: false,
+        size: {
+            type: 'string',
+            value: 'small',
             default: {
-                type: 'boolean',
-                value: false
+                type: 'array',
+                value: [
+                    "medium",
+                    "small",
+                    "mini"
+                ]
             }
         },
-        clearable: {
-            type: 'boolean',
-            value: false,
-            default: {
-                type: 'boolean',
-                value: false
-            }
-        },
-   
     },
 }
 
-export default control
+export default attribute

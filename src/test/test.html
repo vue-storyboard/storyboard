@@ -33,8 +33,13 @@
 
     Vue.directive('drag', {
         inserted: function(el){
+            var elOldBoundingClientRect = {
+                left: el.offsetLeft,
+                top: el.offsetTop,
+                width: el.offsetWidth,
+                height: el.offsetHeight,
+            }
 
-            var oldStyle = el.style
             el.onmousedown = function(evt){
                 var clickX = evt.clientX - el.offsetLeft;
                 var clickY = evt.clientY - el.offsetTop;
@@ -43,25 +48,31 @@
                 }
   
                 document.onmouseup = function(evt){
+                    el.style.border = '';
+                    el.style.cursor = 'default'
                     document.onmousemove = null;
                     document.onmouseup = null;
                 }
             } 
             el.ondblclick = function(evt) {
+                
                 if (el.offsetLeft == 0 && 
-                    el.offsetRight == 0 &&
-                    el.offsetBottom == 0 &&
-                    el.offsetTop == 0 ) {
+                    el.offsetTop == 0 &&
+                    el.offsetWidth == el.parentNode.offsetWidth &&
+                    el.offsetHeight == el.parentNode.offsetHeight ) {
                         
-                       el.style = oldStyle
-                    } else {
-                        el.style.width = '100%'
-                        el.style.height = '100%'
-                        el.style.top = 0
-                        el.style.left = 0
-                        el.style.right = 0
-                        el.style.bottom = 0
-                    }
+                    el.style.width = elOldBoundingClientRect.width + 'px'
+                    el.style.height = elOldBoundingClientRect.height + 'px'
+                    el.style.top = elOldBoundingClientRect.top + 'px'
+                    el.style.left = elOldBoundingClientRect.left + 'px'
+                } else {
+                    el.style.width = '100%'
+                    el.style.height = '100%'
+                    el.style.top = 0
+                    el.style.left = 0
+                    el.style.right = 0
+                    el.style.bottom = 0
+                }
                
             }
             
@@ -70,8 +81,43 @@
                 var edgeBorderStyle = "1px solid #ff0000"
                 var defaultBorderStyle = ''
 
+                // left top
+                if (Math.abs(evt.clientX - dom.getBoundingClientRect().left) <= diffOffest && 
+                    Math.abs(evt.clientY - dom.getBoundingClientRect().top) <= diffOffest) {
+                    dom.style.borderLeft = edgeBorderStyle;
+                    var beforeWidth = dom.scrollWidth
+                    var beforeLeft = dom.offsetLeft
+                    var offest = evt.clientX - dom.getBoundingClientRect().left
+                
+                    dom.style.left = (dom.offsetLeft + offest) + 'px'
+                    dom.style.width = (dom.scrollWidth - (dom.offsetLeft - beforeLeft)) + 'px'
+              
+                    dom.style.borderTop = edgeBorderStyle;
+                    var beforeHeight = dom.scrollHeight
+                    var beforeTop = dom.offsetTop
+                    var offest = evt.clientY - dom.getBoundingClientRect().top
+                
+                    dom.style.top = (dom.offsetTop + offest) + 'px'
+                    dom.style.height = (dom.scrollHeight - (dom.offsetTop - beforeTop)) + 'px'
+                } 
+                // left bottom
+                else if (Math.abs(evt.clientX - dom.getBoundingClientRect().left) <= diffOffest &&
+                        Math.abs(evt.clientY - dom.getBoundingClientRect().bottom) <= diffOffest) {
+                    dom.style.borderLeft = edgeBorderStyle;
+                    var beforeWidth = dom.scrollWidth
+                    var beforeLeft = dom.offsetLeft
+                    var offest = evt.clientX - dom.getBoundingClientRect().left
+                
+                    dom.style.left = (dom.offsetLeft + offest) + 'px'
+                    dom.style.width = (dom.scrollWidth - (dom.offsetLeft - beforeLeft)) + 'px'
+              
+                    dom.style.borderBottom = edgeBorderStyle;
+                    var beforeHeight = dom.scrollHeight
+                    dom.style.height = (evt.clientY - dom.getBoundingClientRect().top) + 'px'
+                } 
+                
                 // left
-                if (Math.abs(evt.clientX - dom.getBoundingClientRect().left) <= diffOffest) {
+                else if (Math.abs(evt.clientX - dom.getBoundingClientRect().left) <= diffOffest) {
                     dom.style.borderLeft = edgeBorderStyle;
                     var beforeWidth = dom.scrollWidth
                     var beforeLeft = dom.offsetLeft
@@ -85,6 +131,31 @@
                     } else {
                         dom.style.cursor = 'w-resize'
                     }
+                } 
+                // right top
+                else if (Math.abs(evt.clientX - dom.getBoundingClientRect().right) <= diffOffest &&
+                        Math.abs(evt.clientY - dom.getBoundingClientRect().top) <= diffOffest) {
+                    dom.style.borderRight = edgeBorderStyle;
+                    var beforeWidth = dom.scrollWidth
+                    dom.style.width = (evt.clientX - dom.getBoundingClientRect().left) + 'px'
+
+                    dom.style.borderTop = edgeBorderStyle;
+                    var beforeHeight = dom.scrollHeight
+                    var beforeTop = dom.offsetTop
+                    var offest = evt.clientY - dom.getBoundingClientRect().top
+                    dom.style.top = (dom.offsetTop + offest) + 'px'
+                    dom.style.height = (dom.scrollHeight - (dom.offsetTop - beforeTop)) + 'px'
+                }
+                // right bottom
+                else if (Math.abs(evt.clientX - dom.getBoundingClientRect().right) <= diffOffest &&
+                        Math.abs(evt.clientY - dom.getBoundingClientRect().bottom) <= diffOffest) {
+                    dom.style.borderRight = edgeBorderStyle;
+                    var beforeWidth = dom.scrollWidth
+                    dom.style.width = (evt.clientX - dom.getBoundingClientRect().left) + 'px'
+
+                    dom.style.borderBottom = edgeBorderStyle;
+                    var beforeHeight = dom.scrollHeight
+                    dom.style.height = (evt.clientY - dom.getBoundingClientRect().top) + 'px'
                 } 
                 // right 
                 else if (Math.abs(evt.clientX - dom.getBoundingClientRect().right) <= diffOffest) {
@@ -131,6 +202,12 @@
                     var top = evt.clientY - clickY;
                     el.style.left = left+'px';
                     el.style.top = top+'px';
+                }
+                elOldBoundingClientRect = {
+                    left: dom.offsetLeft,
+                    top: dom.offsetTop,
+                    width: dom.offsetWidth,
+                    height: dom.offsetHeight,
                 }
                 
             }

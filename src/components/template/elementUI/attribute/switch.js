@@ -1,4 +1,4 @@
-let control = {
+let attribute = {
     type: 'switch',
     name: 'sb-el-switch',
     attribute: {
@@ -49,4 +49,4 @@ let control = {
     },
 }
 
-export default control
+export default attribute

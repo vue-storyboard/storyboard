@@ -1,6 +1,6 @@
-let control = {
-    type: 'inputNumber',
-    name: 'sb-el-input-number',
+let attribute = {
+    type: 'slider',
+    name: 'sb-el-slider',
     attribute: {
         min: {
             type: 'number',
@@ -60,19 +60,8 @@ let control = {
                 value: 1
             }
         },
-        size: {
-            type: 'string',
-            value: 'mini',
-            default: {
-                type: 'array',
-                value: [
-                    "medium",
-                    "small",
-                    "mini"
-                ]
-            }
-        },
+       
     },
 }
 
-export default control
+export default attribute

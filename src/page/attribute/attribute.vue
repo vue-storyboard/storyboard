@@ -7,7 +7,7 @@
 
 <script>
 
-    import attribute from '@/components/template/elementUI/attribute/index'
+    import attribute from '@/components/template/elementUI/controller/index'
     
     export default {
         data() {

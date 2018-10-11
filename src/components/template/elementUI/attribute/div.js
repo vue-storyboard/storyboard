@@ -1,4 +1,4 @@
-let control = {
+let attribute = {
     type: 'div',
     name: 'sb-div',
     attribute: {
@@ -35,4 +35,4 @@ let control = {
     },
 }
 
-export default control
+export default attribute

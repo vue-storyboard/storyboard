@@ -1,6 +1,6 @@
 import icons from '@/service/icon.js'
 
-let control = {
+let attribute = {
     
     type: 'button',
     name: 'sb-el-button',
@@ -92,4 +92,4 @@ let control = {
     
 }
 
-export default control
+export default attribute
