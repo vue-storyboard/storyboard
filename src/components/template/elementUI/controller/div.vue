@@ -1,10 +1,10 @@
 <template>
-    <div>
+    <div class="controller-container">
         <el-row v-for="(attr, key) in attribute" :key="key">
-            <el-col :span='7'>
+            <el-col :span='5'>
                 <span>{{key}}</span>
             </el-col>
-            <el-col :span='17'>
+            <el-col :span='19'>
                 <div v-if="attr.default.type === 'string'">
                     <el-input v-model="attribute[key].value" size="mini" placeholder="请输入内容"></el-input>
                 </div>
@@ -109,5 +109,7 @@
 </script>
 
 <style scoped>
-
+.controller-container {
+    text-align: left;
+}
 </style>

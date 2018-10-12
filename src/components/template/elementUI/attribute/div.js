@@ -43,6 +43,15 @@ let attribute = {
                         value: 'green',
                         alias: 'background-color',
                     }
+                },
+                backgroundImage: {
+                    type: 'string',
+                    value: './assets/img_default.JPG',
+                    alias: 'background-image',
+                    default: {
+                        type: 'string',
+                        value: '',
+                    }
                 }   
             },
             default: {

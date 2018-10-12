@@ -21,6 +21,7 @@
         render: function(createElement) {
             let self = this;
             let {attr, style} = uiControl.getAttr(this.control)
+            console.log('style', style);
             
             var eleFun = function () { 
                  return { 

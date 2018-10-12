@@ -13,7 +13,7 @@ let component = {
             attr: '',
             style: ''
         }
-        let attrs = attrObj.attr
+     
         let attribute = control.attribute
         for (const key in attribute) {
             if (attribute.hasOwnProperty(key)) {
