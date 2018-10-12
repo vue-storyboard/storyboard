@@ -20,8 +20,8 @@ let attribute = {
                     unit: 'px',
                     default: {
                         type: 'string',
-                        value: '200',
-                        unit: 'px',
+                        value: '30',
+                        // unit: 'px',
                     }
                 },
                 height: {
@@ -30,7 +30,7 @@ let attribute = {
                     unit: 'px',
                     default: {
                         type: 'string',
-                        value: '50',
+                        value: '30',
                         unit: 'px',
                     }
                 },

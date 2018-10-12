@@ -20,7 +20,7 @@
         },
         render: function(createElement) {
             let self = this;
-            let attrs = uiControl.getAttr(this.control)
+            let attrs = uiControl.getAttr(this.control).attr
             console.log(attrs);
             var eleFun = function () { 
                  return { 
