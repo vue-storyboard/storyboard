@@ -7,15 +7,18 @@
         
         <span class="custom-tree-node" slot-scope="{ node, data }" >
           <span :node-id="node.id">
-            <input v-if="data.rename" style="width: 50px" @click.stop="" @focus.stop="" @blur.stop="onBlur($event,node)" type="text" :value="data.label">
+            <input v-if="data.rename" style="width: 50px" @click.stop="" @focus.stop="" @blur.stop="onBlur($event,data)" type="text" :value="data.label">
             <span v-else>{{data.label}}</span>
           </span>
-          <span v-if="data.pid==0">
+          <span v-if="data.parent">
             <el-button type="text" size="mini" @click.stop="() => rename(node,data)">
               <span>rename</span>
             </el-button>
             <el-button type="text" size="mini" @click.stop="() => showCode(data)">
               <span>&lt;&gt;</span>
+            </el-button>
+            <el-button type="text" size="mini" @click.stop="() => append(data)">
+              <span>+</span>
             </el-button>
           </span>
         
@@ -26,51 +29,43 @@
 </template>
 
 <script>
+
   export default {
      data() {
       return {
         treeId: 1000,
         controls: this.$store.state.controls,
-
-        treeData: [
-          {
-            pid: 0,
-            id: 1,
-            rename: false,
-            label: '文件 1',
-            children: []
-          },
-          {
-            pid: 0,
-            id: 2,
-            rename: false,
-            label: '文件 2',
-            children: []
-          }
-        ]
+        treeData: this.$store.state.sceneTree
+      
       }
     },
     watch: {
       controls(newValue, oldValue) {
-          let treeChildrenData = this.treeData[0].children
-          newValue.forEach(control => {
-            let inArray = false
-            treeChildrenData.some(node => {
-              if (control.index == node.id) {
-                inArray = true
-                return false
-              }
-            });
-       
-            if (!inArray) {
-              treeChildrenData.push({
-                pid: 1,
-                id: control.index,
-                label: control.type,
-              })
-            }
+          this.treeData.forEach((element, key) => {
+              let treeChildrenData = this.treeData[key].children
+              if (newValue[key] != undefined) {
+                newValue[key].forEach(control => {
+                  let inArray = false
+                  treeChildrenData.some(node => {
+                    if (control.index == node.id) {
+                      inArray = true
+                      return false
+                    }
+                  });
             
+                  if (!inArray) {
+                    treeChildrenData.push({
+                      pid: element.id,
+                      id: control.index,
+                      label: control.type,
+                    })
+                  }
+                  
+                });
+              }
+              
           });
+         
       }
     },
     mounted () {
@@ -78,23 +73,39 @@
     
     },
     methods: {
-      showCode(data) {
-        this.$store.state.currentCodeObj.id = data.id
-        this.$store.state.currentCodeObj.show = !this.$store.state.currentCodeObj.show
-        console.log('showCode')
+      showCode (data) {
+        this.$store.state.currentController.id = data.id
+        this.$store.state.currentController.show = !this.$store.state.currentController.show
       },
-      rename(node, data) {
-        this.treeData[data.id - 1].rename = !this.treeData[data.id - 1].rename
+      rename (node, data) {
+        this.treeData[data.id].rename = !this.treeData[data.id].rename
+      },
+      append (data) {
+        let sceneTreeNode = {
+                pid: 0,
+                id: this.$store.state.sceneTree[this.$store.state.sceneTree.length - 1].id + 1,
+                parent: true,
+                rename: false,
+                label: 'View ' + (this.$store.state.sceneTree[this.$store.state.sceneTree.length - 1].id + 2),
+                children: []
+            } 
+        this.$set(this.$store.state.sceneTree, sceneTreeNode.id, sceneTreeNode)
       },
       onBlur (evt, data) {
-        this.treeData[data.id - 1].label = evt.target.value
-        this.treeData[data.id - 1].rename = !this.treeData[data.id - 1].rename
+        this.treeData[data.id].label = evt.target.value
+        this.treeData[data.id].rename = !this.treeData[data.id].rename
       },
-      handleNodeClick(data) {
-        console.log(data)
-        if (data.pid != 0) {
+      handleNodeClick (data) {
+        
+        if (data.hasOwnProperty('parent') && data.parent) {
+          this.$store.state.currentController.id = data.id
+          var array = this.$store.state.controls[this.$store.state.currentController.id] || []
+          this.$set(this.$store.state.controls, this.$store.state.currentController.id, array)
+        } else {
           this.$store.state.currentIndex = data.id
+          this.$store.state.currentController.id = data.pid
         }
+
       },
       
     }

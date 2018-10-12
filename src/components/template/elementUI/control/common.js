@@ -9,11 +9,11 @@ let component = {
 
     getAttr (control) {
 
-        var attrObj = {
+        let attrObj = {
             attr: '',
             style: ''
         }
-        var attrs = attrObj.attr
+        let attrs = attrObj.attr
         let attribute = control.attribute
         for (const key in attribute) {
             if (attribute.hasOwnProperty(key)) {
@@ -29,7 +29,7 @@ let component = {
                     }
                     
                 } else {
-                    attrObj.attr += this.getElementAttr(element, control, key)
+                    attrObj.attr += this.getElementAttr(element, control, key, false)
                 }
                 
             }
@@ -38,12 +38,12 @@ let component = {
         return attrObj
     },
     getElementAttr (element, control, key, isStyle) {
-        var attr = element
+        let attr = element
         if (!control.hasOwnProperty('show') || !control.show) {
             attr = element.default
         }
         
-        var attrKey = key
+        let attrKey = key
         if (attr.hasOwnProperty('alias') || element.hasOwnProperty('alias')) {
             attrKey = attr.alias || element.alias
         }
@@ -54,7 +54,9 @@ let component = {
 
         if (attr.type == 'boolean') {
             if (attr.value) {
-                return ':' + attrKey + valDelimiter + attr.value + valDelimiter + endDelimiter
+                return ':' + attrKey + attrDelimiter + valDelimiter + attr.value + valDelimiter + endDelimiter
+            } else {
+                return ''
             }
         } 
         else if (attr.type == 'number') {

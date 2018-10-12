@@ -17,8 +17,8 @@
         },
         computed: {
             selectedControl () {
-                if (this.$store.state.controls.length > 0) {
-                    let name = this.$store.state.controls[this.$store.state.currentIndex].type
+                if (this.$store.state.controls.length > 0 && this.$store.state.controls[this.$store.state.currentController.id].length > 0) {
+                    let name = this.$store.state.controls[this.$store.state.currentController.id][this.$store.state.currentIndex].type
                     return attribute[name.charAt(0).toUpperCase() + name.slice(1)]
                 }
                 return attribute['Blank']

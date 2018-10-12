@@ -99,7 +99,7 @@
                 get () {
                     
                     if (this.$store.state.controls.length > 0) {
-                        return this.$store.state.controls[this.$store.state.currentIndex].attribute
+                        return this.$store.state.controls[this.$store.state.currentController.id][this.$store.state.currentIndex].attribute
                     }
                     return {}
                 }

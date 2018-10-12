@@ -72,7 +72,7 @@
         computed: {
             controls: {
                 get () {
-                    return this.$store.state.controls
+                    return this.$store.state.controls[this.$store.state.currentController.id]
                 }
             }
         },

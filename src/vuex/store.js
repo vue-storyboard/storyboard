@@ -10,27 +10,31 @@ const state = {
     currentAddControl: false,
     
     currentControl: {},
-    // 当前代码展示对象
-    currentCodeObj: {
-        id: -1,
+    // 当前展示控制对象
+    currentController: {
+        id: 0,
         show: false
     },
     // 视图所有控件
     controls: [
        
     ],
+    // 场景组件树
+    sceneTree: [
+
+    ]
     
 }
 
 const mutations = {
-    setAttribute (attributes) {
-        state.attributes = attributes
+    setControls (controls) {
+        state.controls = controls
     }
 }
 
 const getters = {
-    getAttribute: state => {
-        return state.attributes
+    getControls: state => {
+        return state.controls
     }
 }
 

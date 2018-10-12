@@ -34,7 +34,7 @@
         },
         computed: {
             currentComponent () {
-                if (this.$store.state.currentCodeObj.show) {
+                if (this.$store.state.currentController.show) {
                     return 'codePage'
                 }
                 return 'home'

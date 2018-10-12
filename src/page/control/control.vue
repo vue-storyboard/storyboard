@@ -23,7 +23,7 @@
 </template>
 
 <script>
-    import Vue from 'vue'
+  
     import draggable from 'vuedraggable'
     import store from '@/vuex/store'
     import components from '@/components/template/elementUI/control/index'
@@ -68,16 +68,26 @@
                 
                 if (this.$store.state.currentAddControl) {
                     let control = JSON.parse(JSON.stringify(this.controls[evt.item.id]))
-                    console.log('cc', control);
-                    
-                    let showCount = this.$store.state.controls.length
+                    let array = this.$store.state.controls[this.$store.state.currentController.id] || []
+                    let showCount = array.length
                     control.index = showCount
                     control.show = true
 
                     this.$store.state.currentControl = control
                     this.$store.state.currentIndex = showCount
-                    this.$store.state.controls.push(this.$store.state.currentControl)
-                    
+
+                    array.push(this.$store.state.currentControl)
+                    this.$set(this.$store.state.controls, this.$store.state.currentController.id, array)
+
+                    let sceneTreeNode = {
+                        pid: 0,
+                        id: 0,
+                        parent: true,
+                        rename: false,
+                        label: 'View 1',
+                        children: []
+                    } 
+                    this.$set(this.$store.state.sceneTree, sceneTreeNode.id, sceneTreeNode)
                 }
                 this.$store.state.currentAddControl = false
             },
