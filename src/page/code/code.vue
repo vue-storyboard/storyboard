@@ -13,6 +13,7 @@
     import { codemirror } from 'vue-codemirror'
     import codePlugin from './index.js'
     import stub from '@/stubs/index.js'
+    import pretty from 'pretty'
 
     export default {
         data() {
@@ -48,24 +49,26 @@
                 let template = ''
                 let styles = ''
                 this.controls.forEach(control => {
-                console.log('style', control);
+                // console.log('style', control);
                     let {attr, style} = uiControl.getAttr(control)
 
                     if (style.length > 0) {
-                        styles += `${control.type} {\n\t\t${style}}`
+                        styles += `${control.type} {${style}}`
                     }
                     
                     
                     template += 
                     `
-            <${control.type} ${attr}>
-                ${control.attribute.hasOwnProperty('text') ? control.attribute['text'].value : ''}
-            </${control.type}>
+                        <${control.type} ${attr}>
+                            ${control.attribute.hasOwnProperty('text') ? control.attribute['text'].value : ''}
+                        </${control.type}>
                     `
             
                 });
-                this.code = this.code.replace(/\{%template%\}/g, template)
-                this.code = this.code.replace(/\{%style%\}/g, styles.replace(/;/g, ';\n\t\t'))
+                
+                this.code = pretty(this.code.replace(/\{%style%\}/g, styles))
+                this.code = pretty(this.code.replace(/\{%template%\}/g, template))
+                
             }
         },
     }
