@@ -56,14 +56,12 @@
                         styles += `${control.type} {${style}}`
                     }
                     
-                    
                     template += 
                     `
                         <${control.type} ${attr}>
                             ${control.attribute.hasOwnProperty('text') ? control.attribute['text'].value : ''}
                         </${control.type}>
                     `
-            
                 });
                 
                 this.code = pretty(this.code.replace(/\{%style%\}/g, styles))
