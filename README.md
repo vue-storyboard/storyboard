@@ -1,3 +1,6 @@
+<h1 align="center">
+  vue-storyboard
+</h1>
 # storyboard
 
 > A Vue.js project
