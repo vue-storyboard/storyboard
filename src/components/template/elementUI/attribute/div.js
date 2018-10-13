@@ -46,7 +46,7 @@ let attribute = {
                 },
                 backgroundImage: {
                     type: 'string',
-                    value: './assets/img_default.JPG',
+                    value: '',
                     alias: 'background-image',
                     default: {
                         type: 'string',

@@ -1,6 +1,5 @@
 <template>
     <div class="home-container">
-        
         <draggable class="viewport" :options="{group:{ name:'control', pull:'', put:true }}" 
         @start="drag=true" @add="onAdd">
             <component v-for="(control, key) in controls" :key="key"   
@@ -36,7 +35,7 @@
             return {
                 myArray: [
                 ],
-        
+       
                 currentTarget: null,
                 deviceOptions: [],
                 selectedOptions: [],
@@ -117,6 +116,7 @@
         left: 0;
         right: 0;
         margin: 0 auto;
+        /* background-image:url('../../assets/logo.png') */
     }
 
     .device-toolbar {

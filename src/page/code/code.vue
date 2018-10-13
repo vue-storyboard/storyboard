@@ -12,11 +12,12 @@
     // require component
     import { codemirror } from 'vue-codemirror'
     import codePlugin from './index.js'
+    import stub from '@/stubs/index.js'
 
     export default {
         data() {
             return {
-                code: '',
+                code: stub.vue,
                 controls: this.$store.state.controls[this.$store.state.currentController.id],
                 cmOptions: {
                     // codemirror options
@@ -43,17 +44,28 @@
         },
         methods: {
             showCode () {
-                this.code = ''
+                
+                let template = ''
+                let styles = ''
                 this.controls.forEach(control => {
-
+                console.log('style', control);
                     let {attr, style} = uiControl.getAttr(control)
 
                     if (style.length > 0) {
-                        style = `style='${style}'`
+                        styles += `${control.type} {\n\t\t${style}}`
                     }
-                    this.code += `<${control.name} ${attr} ${style}>\n${control.attribute.hasOwnProperty('text') ? control.attribute['text'].value : ''}\n</${control.name}>\n`
+                    
+                    
+                    template += 
+                    `
+            <${control.type} ${attr}>
+                ${control.attribute.hasOwnProperty('text') ? control.attribute['text'].value : ''}
+            </${control.type}>
+                    `
             
                 });
+                this.code = this.code.replace(/\{%template%\}/g, template)
+                this.code = this.code.replace(/\{%style%\}/g, styles.replace(/;/g, ';\n\t\t'))
             }
         },
     }

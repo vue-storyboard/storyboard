@@ -63,6 +63,10 @@ let component = {
             return ':' + attrKey + attrDelimiter + valDelimiter + attr.value + valDelimiter + endDelimiter
         } 
         else {
+
+            if (attrKey == 'text' || attr.value == '') {
+                return ''
+            }
             
             if (attr.hasOwnProperty('unit') || element.hasOwnProperty('unit')) {
                 let unit = attr.unit || element.unit
@@ -73,6 +77,7 @@ let component = {
 
                 return attrKey + attrDelimiter + valDelimiter + attr.value + unit + valDelimiter + endDelimiter
             }
+
             return attrKey + attrDelimiter + valDelimiter + attr.value + valDelimiter + endDelimiter
         }
     }
