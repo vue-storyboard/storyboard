@@ -14,6 +14,7 @@
     import codePlugin from './index.js'
     import stub from '@/stubs/index.js'
     import pretty from 'pretty'
+    import classStyle from '@/components/template/elementUI/style/center.js'
 
     export default {
         data() {
@@ -48,8 +49,9 @@
                 
                 let template = ''
                 let styles = ''
+
                 this.controls.forEach(control => {
-                // console.log('style', control);
+            
                     let {attr, style} = uiControl.getAttr(control)
 
                     if (style.length > 0) {
@@ -62,13 +64,40 @@
                             ${control.attribute.hasOwnProperty('text') ? control.attribute['text'].value : ''}
                         </${control.type}>
                     `
+
+                    for (const key in control.attribute) {
+                        if (control.attribute.hasOwnProperty(key)) {
+                            const element = control.attribute[key];
+                            if (element.hasOwnProperty('className') && element.value.length > 0) {
+                                control.parent.className.split(' ').forEach(parentClass => {
+                                    if (classStyle[this.camelize(parentClass)]) {
+                                        styles += classStyle[this.camelize(parentClass)]
+                                    }
+                                });
+                                
+                                styles += classStyle[this.camelize(element.value)]
+                            }
+                        }
+                    }
                 });
                 
                 this.code = pretty(this.code.replace(/\{%style%\}/g, styles))
                 this.code = pretty(this.code.replace(/\{%template%\}/g, template))
                 
-            }
+            },
+            camelize (words, separator='-') {
+                words = words.toLowerCase(words)
+                words = words.replace(new RegExp(separator , 'g' ), ' ');
+                words = words.replace(/\b\w+\b/g, function(word, index) {
+                    if (index == 0) {
+                        return word
+                    }
+                    return word.substring(0,1).toUpperCase()+word.substring(1);}
+                )
+                return words.replace(new RegExp(' ' , 'g' ), '');
+            },
         },
+        
     }
 </script>
 

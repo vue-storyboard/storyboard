@@ -2,6 +2,7 @@ let attribute = {
     type: 'div',
     name: 'sb-div',
     show: false,
+    parent: null,
     attribute: {
         text: {
             type: 'string',
@@ -15,6 +16,7 @@ let attribute = {
             type: 'string',
             className: 'center-type',
             value: '',
+            sbDefault: '',
             default: {
                 type: 'array',
                 value: '',

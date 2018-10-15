@@ -7,7 +7,7 @@ let component = {
         return /.*?px$/.test(string)
     },
 
-    getAttr (control) {
+    getAttr (control, parent) {
 
         let attrObj = {
             attr: '',
@@ -29,7 +29,7 @@ let component = {
                     }
                     
                 } else {
-                    attrObj.attr += this.getElementAttr(element, control, key, false)
+                    attrObj.attr += this.getElementAttr(element, control, key, false, parent)
                 }
                 
             }
@@ -37,7 +37,7 @@ let component = {
    
         return attrObj
     },
-    getElementAttr (element, control, key, isStyle) {
+    getElementAttr (element, control, key, isStyle, parent) {
         let attr = element
         if (!control.hasOwnProperty('show') || !control.show) {
             attr = element.default
@@ -68,13 +68,18 @@ let component = {
                 return ''
             }
 
-            if (attr.hasOwnProperty('className') || element.hasOwnProperty('className')) {
-                let className = attr.className || element.className
-                return className + '=' + '"'+ attr.value +'"'
+            if (element.hasOwnProperty('className') || attr.hasOwnProperty('className')) {
+                let className = element.className || attr.className
+                if (parent) {
+                    control.parent = parent
+                    parent.className = parent.className + ' ' + attr.value + '-parent'
+                }
+                
+                return 'class=' + '"'+ attr.value +'"'
             }
             
-            if (attr.hasOwnProperty('unit') || element.hasOwnProperty('unit')) {
-                let unit = attr.unit || element.unit
+            if (element.hasOwnProperty('unit') || attr.hasOwnProperty('unit')) {
+                let unit = element.unit || attr.unit
                 
                 if (this.isPercentEnd(attr.value) || this.isPXEnd(attr.value)) {
                     unit = ''

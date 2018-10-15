@@ -1,14 +1,18 @@
 <template>
     <div class="home-container">
-        <draggable class="viewport" :options="{group:{ name:'control', pull:'', put:true }}" 
-        @start="drag=true" @add="onAdd">
-            <component v-for="(control, key) in controls" :key="key"   
-                :index="control.index" 
-                :is="control.name"
-                :control="control"
-                :attribute="control.attribute">
-            </component>
-        </draggable>
+        <div class="viewport">
+            <draggable class="content-container" :options="{group:{ name:'control', pull:'', put:true }}" 
+            @start="drag=true" @add="onAdd">
+                
+                    <component v-for="(control, key) in controls" :key="key"   
+                        :index="control.index" 
+                        :is="control.name"
+                        :control="control"
+                        :attribute="control.attribute">
+                    </component>
+                
+            </draggable>
+        </div>
         <div class="device-toolbar">
             <div class="device-container">
                 <el-cascader
@@ -137,5 +141,9 @@
     }
     .device-container-tips {
         display: inline-block;
+    }
+    .content-container {
+        width: 100%;
+        height: 100%;
     }
 </style>
