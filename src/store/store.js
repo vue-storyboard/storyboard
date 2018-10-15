@@ -25,18 +25,29 @@ const state = {
     ]
     
 }
+// getters
+const getters = {
+    isCurrentSceneShow: (state, getters) => {
+        console.log('store', state, getters);
+        
+        return state.currentController.show
+    }
+}
 
+// actions
+const actions = {
+
+}
+
+// mutations
 const mutations = {
     setControls (controls) {
         state.controls = controls
     }
 }
 
-const getters = {
-    getControls: state => {
-        return state.controls
-    }
-}
+
+
 
 export default new Vuex.Store({
     state,
