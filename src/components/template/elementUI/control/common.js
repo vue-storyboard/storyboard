@@ -67,6 +67,11 @@ let component = {
             if (attrKey == 'text' || attr.value == '') {
                 return ''
             }
+
+            if (attr.hasOwnProperty('className') || element.hasOwnProperty('className')) {
+                let className = attr.className || element.className
+                return className + '=' + '"'+ attr.value +'"'
+            }
             
             if (attr.hasOwnProperty('unit') || element.hasOwnProperty('unit')) {
                 let unit = attr.unit || element.unit

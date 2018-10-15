@@ -11,6 +11,21 @@ let attribute = {
                 value: 'div'
             }
         },
+        center: {
+            type: 'string',
+            className: 'center-type',
+            value: '',
+            default: {
+                type: 'array',
+                value: '',
+                option: [
+                    'sb-default',
+                    "sb-center",
+                    "sb-vertical-center",
+                    "sb-horizontally-center",
+                ]
+            }
+        },
         style: {
             type: 'css',
             value: {
@@ -52,7 +67,58 @@ let attribute = {
                         type: 'string',
                         value: '',
                     }
-                }   
+                },
+                position: {
+                    type: 'string',
+                    value: '',
+                    default: {
+                        type: 'array',
+                        value: '',
+                        option: [
+                            "absolute",
+                            "relative",
+                            "static",
+                            "inherit",
+                        ]
+                    }
+                },                           
+                top: {
+                    type: 'string',
+                    value: '',
+                    unit: 'px',
+                    default: {
+                        type: 'string',
+                        value: '',
+                    }
+                },
+                bottom: {
+                    type: 'string',
+                    value: '',
+                    unit: 'px',
+                    default: {
+                        type: 'string',
+                        value: '',
+                    }
+                },
+                left: {
+                    type: 'string',
+                    value: '',
+                    unit: 'px',
+                    default: {
+                        type: 'string',
+                        value: '',
+                    }
+                },
+                right: {
+                    type: 'string',
+                    value: '',
+                    unit: 'px',
+                    default: {
+                        type: 'string',
+                        value: '',
+                    }
+                },
+                
             },
             default: {
                 type: 'css',

@@ -21,7 +21,7 @@
         render: function(createElement) {
             let self = this;
             let {attr, style} = uiControl.getAttr(this.control)
-            console.log('style', style);
+            console.log('div: ', `<div ${attr} style='${style}' @click.native.prevent=click>${self.attribute['text'].value}</div>`);
             
             var eleFun = function () { 
                  return { 

@@ -28,8 +28,6 @@ const state = {
 // getters
 const getters = {
     isCurrentSceneShow: (state, getters) => {
-        console.log('store', state, getters);
-        
         return state.currentController.show
     }
 }
