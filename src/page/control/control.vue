@@ -25,7 +25,6 @@
 <script>
   
     import draggable from 'vuedraggable'
-    import store from '@/vuex/store'
     import components from '@/components/template/elementUI/control/index'
     import uiControls from '@/components/template/elementUI/attribute/index.js'
 
